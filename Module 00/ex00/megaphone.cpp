@@ -11,7 +11,7 @@ int	main(int ac, char **av)
 		s += av[i];
 		
 		for (unsigned long i = 0; i < s.length(); i++)
-		s[i] = std::toupper(s[i]);
+			s[i] = std::toupper(s[i]);
 		
 		std::cout << s << std::endl;
 	}
