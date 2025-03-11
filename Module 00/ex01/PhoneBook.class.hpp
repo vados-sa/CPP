@@ -7,8 +7,7 @@ class PhoneBook {
 
 	public:
 	
-	PhoneBook(void); //member function with the same name as its class must be a constructor
-	~PhoneBook(void);
+	//PhoneBook(void); //member function with the same name as its class must be a constructor
 
 	void	add_contact();
 	void	search_contact();
