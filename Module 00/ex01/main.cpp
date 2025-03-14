@@ -4,7 +4,7 @@
 
 int	main()
 {
-	PhoneBook phonebook; // phonebook is an object -> it has atributes and methods
+	PhoneBook phonebook; // phonebook is an object, instance of Phonebook (class), which has atributes and methods.
 
 	std::string	command;
 

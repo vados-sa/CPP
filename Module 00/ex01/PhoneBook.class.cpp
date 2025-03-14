@@ -5,7 +5,8 @@
 
 // move to Phonebook.class.hpp later
 class PhoneBook {
-
+	private:
+		Contact contact[8]; //atribute
 	public:
 		void	add_contact(); // method
 		void	search_contact(); // method
