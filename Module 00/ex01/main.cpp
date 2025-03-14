@@ -4,7 +4,7 @@
 
 int	main()
 {
-	PhoneBook phonebook;
+	PhoneBook phonebook; // phonebook is an object -> it has atributes and methods
 
 	std::string	command;
 
@@ -15,10 +15,8 @@ int	main()
 		
 		if (!command.compare("ADD"))
 			phonebook.add_contact();
-			//std::cout << "calling function to add" << std::endl;
 		else if (!command.compare("SEARCH"))
 			phonebook.search_contact();
-			//std::cout << "calling function to search" << std::endl;
 		else if (!command.compare("EXIT"))
 			exit(0);
 	}	

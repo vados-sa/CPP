@@ -1,8 +1,15 @@
 #include <iostream>
 #include <stdlib.h>
-#include "PhoneBook.class.hpp"
-#include "Contact.class.hpp"
+//#include "PhoneBook.class.hpp"
+//#include "Contact.class.hpp"
 
+// move to Phonebook.class.hpp later
+class PhoneBook {
+
+	public:
+		void	add_contact(); // method
+		void	search_contact(); // method
+};
 
 /* If the user enters this command, they are prompted to input the information
 of the new contact one field at a time. Once all the fields have been completed,
@@ -13,7 +20,9 @@ darkest secret. A saved contact can’t have empty fields.
 - dynamic alloc is forbiden.*/
 void	PhoneBook::add_contact()
 {
-	std::string first_name;
+	std::cout << "add_contact function was called." << std::endl;
+
+	/* std::string first_name;
 	std::string last_name;
 	std::string nickname;
 	std::string phone_number;
@@ -29,7 +38,7 @@ void	PhoneBook::add_contact()
 	std::cout << "Phone Number: " << std::endl;
 	std::cin >> phone_number; //std::getline(std::cin >> std::ws, phone_number);
 	std::cout << "Darkest Secret: " << std::endl;
-	std::cin >> darkest_scret; //std::getline(std::cin >> std::ws, darkest_secret);
+	std::cin >> darkest_scret; //std::getline(std::cin >> std::ws, darkest_secret); */
 }
 
 /* Display a specific contact
@@ -44,11 +53,5 @@ is out of range or wrong, define a relevant behavior. Otherwise, display the
 contact information, one field per line. */
 void	PhoneBook::search_contact(void)
 {
-
-}
-
-
-PhoneBook::PhoneBook(void)
-{
-	// not sure yet if this will be used.
+	std::cout << "search_contact function was called." << std::endl;
 }
