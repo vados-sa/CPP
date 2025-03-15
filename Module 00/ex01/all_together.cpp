@@ -53,11 +53,13 @@ bool	Contact::set_contact()
 	if (darkest_secret.empty())
 		return false;
 
+	std::cout << "Contact added!" << std::endl;
 	return true;
 }
 
 void	Contact::display_contact() const
 {
+	std::cout << std::endl;
 	std::cout << first_name << std::endl;
 	std::cout << last_name << std::endl;
 	std::cout << nickname << std::endl;
@@ -73,71 +75,45 @@ bool	Contact::is_set()
 	return true;
 }
 
-void	Contact::truncate_and_or_display(std::string info_code) // ISSUE!!! info is not being well desplayed -> also this is a monster, fix it
+void	Contact::truncate_and_or_display(std::string info_code)
 {
 	std::string	info_to_display;
 
-	if (info_code.compare("fn"))
-	{
+	if (info_code.compare("fn") == 0)
 		info_to_display = first_name;
-		if (first_name.length() > 10)
-		{
-			info_to_display.resize(10);
-			info_to_display.insert(10, ".");	
-		}
-		else
-		{
-			for (unsigned long i = 0; i < (10 - info_to_display.length()); i++)
-				info_to_display = " " + info_to_display;
-		}
-	}
-
-	else if (info_code.compare("ln"))
-	{
+	else if (info_code.compare("ln") == 0)
 		info_to_display = last_name;
-		if (last_name.length() > 10)
-		{
-			info_to_display.resize(10);
-			info_to_display.insert(10, ".");	
-		}
-		else
-		{
-			for (unsigned long i = 0; i < (10 - info_to_display.length()); i++)
-				info_to_display = " " + info_to_display;
-		}
-	}
-
-	else if (info_code.compare("nn"))
-	{
+	else if (info_code.compare("nn") == 0)
 		info_to_display = nickname;
-		if (nickname.length() > 10)
-		{
-			info_to_display.resize(10);
-			info_to_display.insert(10, ".");	
-		}
-		else
-		{
-			for (unsigned long i = 0; i < (10 - info_to_display.length()); i++)
-				info_to_display = " " + info_to_display;
-		}
+	if (info_to_display.length() > 10)
+	{
+		info_to_display.resize(9);
+		info_to_display.insert(9, ".");	
 	}
+	else
+	{
+		while (info_to_display.length() < 10)
+            info_to_display = " " + info_to_display;
+	}
+	
 	std::cout << info_to_display;
 }
 
-void	PhoneBook::add_contact()
+void	PhoneBook::add_contact() // not working well, 9th contact is added somehow.
 {
 	static int contact_count = 0;
 	int	index = contact_count % 8; // ensures old contacts are replaced in order.
+    std::cout << "Adding contact at index: " << index << " (contact count: " << contact_count << ")\n";
 
 	if (contact_count >= 8)
 		std::cout << "Phonebook is full. Replacing oldest contact...\n";
-	if (contact[index].set_contact()) // This calls the set_contact() method on that specific Contact object.
+	if (contact[index].set_contact() == true) // This calls the set_contact() method on that specific Contact object.
 		contact_count++;
 	else
 		std::cout << "Invalid input. Please try again.\n";
 }
 
-void	PhoneBook::search_contact(void)
+void	PhoneBook::search_contact(void) // not working well, last_name is being printed first, first_name comes second and thrid
 {
 	if (contact[0].is_set() == false)
 	{
@@ -145,7 +121,7 @@ void	PhoneBook::search_contact(void)
 		return ;
 	}
 
-	for (int i = 0; contact[i].is_set(); i++) // while the contacts exits
+	for (int i = 0; i < 8 && contact[i].is_set(); i++)
 	{
 		std::cout << "         " << i << "|";
 		contact[i].truncate_and_or_display("fn");
@@ -156,13 +132,25 @@ void	PhoneBook::search_contact(void)
 		std::cout << std::endl << std::endl;
 	}
 
-	int index; // ISSUE!!!  SEGFAULT if a non int is chosen
-	std::cout << "Please enter the index of the contact to display: ";
-	std::cin >> index;
-	if (contact[index].is_set() == true)
-		contact[index].display_contact();
-	else
-		std::cout << "Index is invalid or out of range. Please try again." << std::endl;
+	int index;
+    std::string input;
+    std::cout << "Please enter the index of the contact you want: ";
+    std::cin >> input;
+    try {
+        index = std::stoi(input);
+        if (index < 0 || index >= 8 || !contact[index].is_set()) {
+            throw std::out_of_range("Index is invalid or out of range."); // costume exception type with 'throw'
+        }
+        contact[index].display_contact();
+    } catch (const std::invalid_argument &e) {
+        std::cout << "Invalid input. Please try again." << std::endl;
+    } catch (const std::out_of_range &e) {
+        std::cout << e.what() << " Please try again." << std::endl;
+    } catch (const std::exception &e) {
+        std::cout << "Standard exception: " << e.what() << std::endl;
+	} catch (...) {
+        std::cout << "An unexpected error occurred." << std::endl;
+    }
 }
 
 int	main()
