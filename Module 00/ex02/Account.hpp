@@ -29,7 +29,10 @@ public:
 	static int	getNbWithdrawals( void );
 	static void	displayAccountsInfos( void );
 
-	Account( int initial_deposit );
+	/*Constructor = special method that is automatically called when an object
+					is instantiated. It is useful for assigning values to 
+					attributes as aguments*/
+	Account( int initial_deposit ); // creates an account and takes initial deposit as parameter
 	~Account( void );
 
 	void	makeDeposit( int deposit );
@@ -48,7 +51,7 @@ private:
 	static void	_displayTimestamp( void );
 
 	int				_accountIndex;
-	int				_amount;
+	int				_amount; // amount = initial_deposit; -> for when Account() is called
 	int				_nbDeposits;
 	int				_nbWithdrawals;
 

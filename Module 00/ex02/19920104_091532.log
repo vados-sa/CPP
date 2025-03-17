@@ -1,3 +1,46 @@
+[ This log file provides a comprehensive record of the creation, deposits, withdrawals,
+and closure of accounts, along with periodic summaries of the overall state of the 
+accounts.
+
+- Account Creation:
+Each account is created with an initial amount.
+	Example: [19920104_091532] index:0;amount:42;created.
+
+- Initial Summary:
+A summary of the total number of accounts, total amount of money, number of deposits, 
+and number of withdrawals.
+	Example: [19920104_091532] accounts:8;total:20049;deposits:0;withdrawals:0.
+
+- Account Status:
+The status of each account, showing the current amount, number of deposits, and number
+of withdrawals.
+	Example: [19920104_091532] index:0;amount:42;deposits:0;withdrawals:0.
+
+- Deposits:
+Each deposit action, showing the previous amount, deposit amount, new amount, and
+the number of deposits.
+	Example: [19920104_091532] index:0;p_amount:42;deposit:5;amount:47;nb_deposits:1.
+
+- Updated Summary:
+An updated summary after deposits.
+	Example: [19920104_091532] accounts:8;total:21524;deposits:8;withdrawals:0.
+
+- Withdrawals:
+Each withdrawal action, showing the previous amount, withdrawal amount, new amount, 
+and the number of withdrawals. Refused withdrawals are also logged.
+	Example: [19920104_091532] index:1;p_amount:819;withdrawal:34;amount:785;nb_withdrawals:1.
+	Example of a refused withdrawal: [19920104_091532] index:0;p_amount:47;withdrawal:refused.
+
+- Final Summary:
+A final summary after withdrawals.
+	Example: [19920104_091532] accounts:8;total:12442;deposits:8;withdrawals:6.
+
+- Account Closure:
+Each account closure, showing the final amount in the account.
+	Example: [19920104_091532] index:0;amount:47;closed. ]
+
+----------------------------------------------------------------------------------------------
+
 [19920104_091532] index:0;amount:42;created
 [19920104_091532] index:1;amount:54;created
 [19920104_091532] index:2;amount:957;created
