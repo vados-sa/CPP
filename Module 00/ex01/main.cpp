@@ -5,18 +5,21 @@ int	main()
 	PhoneBook phonebook; // phonebook is an object, instance of Phonebook (class), which has atributes and methods.
 
 	std::string	command;
+	bool running = true;
 
-	while(1)
+	while(running)
 	{
 		std::cout << "Please enter one of the three commands: ADD, SEARCH, EXIT" << std::endl;
 		std::cin >> command;
 		
-		if (!command.compare("ADD"))
+		if (command == "ADD")
 			phonebook.add_contact();
-		else if (!command.compare("SEARCH"))
+		else if (command == "SEARCH")
 			phonebook.search_contact();
-		else if (!command.compare("EXIT"))
-			exit(0);
+		else if (command == "EXIT")
+			running = false;
+		else
+			std::cout << "Invalid command." << std::endl;
 	}	
 
 	return 0;

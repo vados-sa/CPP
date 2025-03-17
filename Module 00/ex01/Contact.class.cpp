@@ -42,7 +42,7 @@ void	Contact::display_contact() const
 	std::cout << std::endl;
 }
 
-bool	Contact::is_set()
+bool	Contact::is_set() const
 {
 	if (first_name.empty())
 		return false;
