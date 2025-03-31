@@ -27,7 +27,7 @@ public:
 	static int	getTotalAmount( void );
 	static int	getNbDeposits( void );
 	static int	getNbWithdrawals( void );
-	static void	displayAccountsInfos( void );
+	static void	displayAccountsInfos( void ); // called in main!
 
 	/*Constructor = special method that is automatically called when an object
 					is instantiated. It is useful for assigning values to 
@@ -35,10 +35,10 @@ public:
 	Account( int initial_deposit ); // creates an account and takes initial deposit as parameter
 	~Account( void );
 
-	void	makeDeposit( int deposit );
-	bool	makeWithdrawal( int withdrawal );
+	void	makeDeposit( int deposit );  // called in main!
+	bool	makeWithdrawal( int withdrawal ); // called in main!
 	int		checkAmount( void ) const;
-	void	displayStatus( void ) const;
+	void	displayStatus( void ) const;  // called in main!
 
 
 private:
