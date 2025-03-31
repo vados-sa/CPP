@@ -2,7 +2,7 @@
 #define PHONE_BOOK_CLASS_H
 
 #include "Contact.class.hpp"
-//#include <iostream>
+#include <sstream>
 #include <stdlib.h>
 
 class PhoneBook {

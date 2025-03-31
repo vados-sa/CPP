@@ -4,7 +4,7 @@ void	PhoneBook::add_contact() // not working well, 9th contact is added somehow.
 {
 	static int contact_count = 0;
 	int	index = contact_count % 8; // ensures old contacts are replaced in order.
-    std::cout << "Adding contact at index: " << index << " (contact count: " << contact_count << ")\n";
+    //std::cout << "Adding contact at index: " << index << " (contact count: " << contact_count << ")\n";
 
 	if (contact_count >= 8)
 		std::cout << "Phonebook is full. Replacing oldest contact...\n";
@@ -37,11 +37,12 @@ void	PhoneBook::search_contact(void) // not working well, last_name is being pri
     std::string input;
     std::cout << "Please enter the index of the contact you want: ";
     std::cin >> input;
-    try {
-        index = std::stoi(input);
-        if (index < 0 || index >= 8 || !contact[index].is_set()) {
+    try { //stoi is not allowed in c++98
+        std::stringstream ss(input); // parse the string input into an integer.
+		if (!(ss >> index) || !ss.eof()) // Attempts to extract an integer from the stringstream. & Ensures that the entire input was consumed.
+    		throw std::invalid_argument("Invalid input. Not a valid integer.");
+        if (index < 0 || index >= 8 || !contact[index].is_set())
             throw std::out_of_range("Index is invalid or out of range."); // costume exception type with 'throw'
-        }
         contact[index].display_contact();
     } catch (const std::invalid_argument &e) {
         std::cout << "Invalid input. Please try again." << std::endl;
