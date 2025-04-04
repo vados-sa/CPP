@@ -11,7 +11,7 @@ void	PhoneBook::add_contact() // not working well, 9th contact is added somehow.
 	if (contact[index].set_contact() == true) // This calls the set_contact() method on that specific Contact object.
 		contact_count++;
 	else
-		std::cout << "Invalid input. Please try again.\n";
+		std::cout << "A saved contact can't have empty fields. Please try again.\n";
 }
 
 void	PhoneBook::search_contact(void) // not working well, last_name is being printed first, first_name comes second and thrid

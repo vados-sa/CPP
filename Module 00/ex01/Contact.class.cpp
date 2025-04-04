@@ -1,29 +1,47 @@
 #include "Contact.class.hpp"
 
+std::string trim(const std::string& str)
+{
+    size_t start = str.find_first_not_of(" \t\n\r");
+    size_t end = str.find_last_not_of(" \t\n\r");
+
+    if (start == std::string::npos) {
+        return ""; // String is all whitespace
+    }
+
+    return str.substr(start, end - start + 1);
+}
+
 bool	Contact::set_contact()
 {
 	std::cout << "Enter First Name: " << std::endl;
-	std::getline(std::cin >> std::ws, first_name); // it directly modifies the existing class attribute. 
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+	std::getline(std::cin, first_name); // it directly modifies the existing class attribute.
+	first_name = trim(first_name);
 	if (first_name.empty())
 		return false;
 
 	std::cout << "Enter Last Name: " << std::endl;
-	std::getline(std::cin >> std::ws, last_name);
+	std::getline(std::cin, last_name);
+	last_name = trim(last_name);
 	if (last_name.empty())
 		return false;
 
 	std::cout << "Enter Nickname: " << std::endl;
-	std::getline(std::cin >> std::ws, nickname);
+	std::getline(std::cin, nickname);
+	nickname = trim(nickname);
 	if (nickname.empty())
 		return false;
 
 	std::cout << "Enter Phone Number: " << std::endl;
-	std::getline(std::cin >> std::ws, phone_number);
+	std::getline(std::cin, phone_number);
+	phone_number = trim(phone_number);
 	if (phone_number.empty())
 		return false;
 
 	std::cout << "Enter Darkest Secret: " << std::endl;
-	std::getline(std::cin >> std::ws, darkest_secret);
+	std::getline(std::cin, darkest_secret);
+	darkest_secret = trim(darkest_secret);
 	if (darkest_secret.empty())
 		return false;
 
@@ -65,10 +83,11 @@ void	Contact::truncate_and_or_display(std::string info_code)
 		info_to_display.insert(9, ".");	
 	}
 	else
-	{
+		std::cout << std::setw(10);
+	/* {
 		while (info_to_display.length() < 10)
             info_to_display = " " + info_to_display;
-	}
+	} */
 	
 	std::cout << info_to_display;
 }

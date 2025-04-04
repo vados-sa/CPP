@@ -2,6 +2,7 @@
 #define CONTACT_CLASS_H
 
 #include <iostream>
+#include <iomanip>
 
 class Contact {	
 	private:
