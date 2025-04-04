@@ -14,7 +14,6 @@ class HumanB {
 	public:
 		HumanB(std::string name);
 		void attack(); // displays: <name> attacks with their <weapon type>
-		void setWeapon(Weapon type);
 };
 
 #endif

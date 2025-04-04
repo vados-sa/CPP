@@ -10,8 +10,9 @@ class Weapon {
 
 	public:
 		Weapon(std::string type);
-		int& getType(); // returns a constant reference to type.
+		const std::string& getType(); // returns a constant reference to type.
 		void setType(std::string new_value); // sets type using the new value passed as a parameter
+		void setWeapon(Weapon type);
 
 };
 

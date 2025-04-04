@@ -13,7 +13,7 @@ class HumanA {
 
 	public:
 		HumanA(std::string name, Weapon type);
-		void attack(); // displays: <name> attacks with their <weapon type>
+		void attack();
 };
 
 #endif
