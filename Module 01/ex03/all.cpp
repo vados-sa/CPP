@@ -90,14 +90,13 @@ HumanA::HumanA(std::string name, Weapon type)
 
 void HumanB::setWeapon(Weapon type)
 {
-	std::string *wb_type = type.getType();
-	weapon = type.setType(wb_type); 
+	weapon->setWeapon(type); 
 }
 
 
 void HumanB::attack()
 {
-	if (weapon.empty())
+	if (!weapon)
 		std::cout << "HumanB has no weapon." << std::endl;
 	else
 		std::cout << name << " attacks with their " << weapon << std::endl;
