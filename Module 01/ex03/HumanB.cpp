@@ -1,9 +1,21 @@
 #include "HumanB.hpp"
 
+void HumanB::setWeapon(Weapon& weapon)
+{
+	this->weapon = &weapon; 
+}
+
+
 void HumanB::attack()
 {
-	if (HumanB::weapon) // Human B will not always have a weapon.
-		std::cout << HumanB::name << " attacks with their " << HumanB::weapon << std::endl;
+	if (!weapon)
+		std::cout << name << " has no weapon." << std::endl;
 	else
-		std::cout << "HumanB has no weapon." << std::endl;
+		std::cout << name << " attacks with their " << weapon->getType() << std::endl;
+}
+
+HumanB::HumanB(std::string name)
+{
+	this->name = name;
+	weapon = nullptr;
 }
