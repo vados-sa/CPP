@@ -1,20 +1,19 @@
 #include "PhoneBook.class.hpp"
 
-void	PhoneBook::add_contact() // not working well, 9th contact is added somehow.
+void	PhoneBook::add_contact()
 {
 	static int contact_count = 0;
-	int	index = contact_count % 8; // ensures old contacts are replaced in order.
-    //std::cout << "Adding contact at index: " << index << " (contact count: " << contact_count << ")\n";
+	int	index = contact_count % 8;
 
 	if (contact_count >= 8)
 		std::cout << "Phonebook is full. Replacing oldest contact...\n";
 	if (contact[index].set_contact() == true) // This calls the set_contact() method on that specific Contact object.
 		contact_count++;
 	else
-		std::cout << "A saved contact can't have empty fields. Please try again.\n";
+		std::cout << "A saved contact can't have empty fields. Please try again.\n"; // if so, everything that has previously being added has to be cleaned.
 }
 
-void	PhoneBook::search_contact(void) // not working well, last_name is being printed first, first_name comes second and thrid
+void	PhoneBook::search_contact(void)
 {
 	if (contact[0].is_set() == false)
 	{
@@ -24,7 +23,10 @@ void	PhoneBook::search_contact(void) // not working well, last_name is being pri
 
 	for (int i = 0; i < 8 && contact[i].is_set(); i++)
 	{
-		std::cout << "         " << i << "|";
+		std::cout << std::setw(10);
+		std::cout << i;
+		std::cout << "|";
+		//std::cout << "         " << i << "|";
 		contact[i].truncate_and_or_display("fn");
 		std::cout << "|";
 		contact[i].truncate_and_or_display("ln");
@@ -37,7 +39,7 @@ void	PhoneBook::search_contact(void) // not working well, last_name is being pri
     std::string input;
     std::cout << "Please enter the index of the contact you want: ";
     std::cin >> input;
-    try { //stoi is not allowed in c++98
+    try {
         std::stringstream ss(input); // parse the string input into an integer.
 		if (!(ss >> index) || !ss.eof()) // Attempts to extract an integer from the stringstream. & Ensures that the entire input was consumed.
     		throw std::invalid_argument("Invalid input. Not a valid integer.");

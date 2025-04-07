@@ -15,6 +15,7 @@ class Contact {
 	public:
 		bool set_contact();  // Method to set contact details
 		bool is_set() const;
+		bool unset();
 		void truncate_and_or_display(std::string info);
 		void display_contact() const;  // Method to display details
 };

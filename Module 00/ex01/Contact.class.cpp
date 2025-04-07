@@ -1,5 +1,20 @@
 #include "Contact.class.hpp"
 
+bool	Contact::unset()
+{
+	if (first_name.empty() == false)
+		first_name.clear();
+	if (last_name.empty() == false)
+		last_name.clear();
+	if (nickname.empty() == false)
+		nickname.clear();
+	if (phone_number.empty() == false)
+		phone_number.clear();
+	if (darkest_secret.empty() == false)
+		darkest_secret.clear();
+	return false;
+}
+
 std::string trim(const std::string& str)
 {
     size_t start = str.find_first_not_of(" \t\n\r");
@@ -19,31 +34,31 @@ bool	Contact::set_contact()
 	std::getline(std::cin, first_name); // it directly modifies the existing class attribute.
 	first_name = trim(first_name);
 	if (first_name.empty())
-		return false;
+		return unset(); // unset fucntion returns false
 
 	std::cout << "Enter Last Name: " << std::endl;
 	std::getline(std::cin, last_name);
 	last_name = trim(last_name);
 	if (last_name.empty())
-		return false;
+		return unset(); // unset fucntion returns false
 
 	std::cout << "Enter Nickname: " << std::endl;
 	std::getline(std::cin, nickname);
 	nickname = trim(nickname);
 	if (nickname.empty())
-		return false;
+		return unset(); // unset fucntion returns false
 
 	std::cout << "Enter Phone Number: " << std::endl;
 	std::getline(std::cin, phone_number);
 	phone_number = trim(phone_number);
 	if (phone_number.empty())
-		return false;
+		return unset(); // unset fucntion returns false
 
 	std::cout << "Enter Darkest Secret: " << std::endl;
 	std::getline(std::cin, darkest_secret);
 	darkest_secret = trim(darkest_secret);
 	if (darkest_secret.empty())
-		return false;
+		return unset(); // unset fucntion returns false
 
 	std::cout << "Contact added!" << std::endl;
 	return true;
