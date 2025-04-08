@@ -1,6 +1,23 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
+#include "FileReplacer.hpp"
+
+int	main(int ac, char *av[])
+{
+	if (ac != 4)
+	{
+		std::cout << "Wrong number of arguments. Usage: ./sed_is_for_losers <filename> s1 s2" << std::endl;
+		return 1;
+	}
+
+	FileReplacer replacer(av[1], av[2], av[3]);
+
+	if (!replacer.process_file())
+		return 1;
+	
+	return 0;
+}
+
+/*
+C style solution:
 
 // replace s1 with s2.
 void replace_all(std::string& s, const std::string& s1, const std::string& s2)
@@ -53,4 +70,4 @@ int	main(int ac, char *av[])
 	}
 
 	return 0;
-}
+} */
