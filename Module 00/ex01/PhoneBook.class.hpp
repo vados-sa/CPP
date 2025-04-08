@@ -11,6 +11,7 @@ class PhoneBook {
 	public:
 		void	add_contact();
 		void	search_contact();
+		int		get_contact_index() const;
 };
 
 #endif

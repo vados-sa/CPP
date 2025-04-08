@@ -15,7 +15,7 @@ bool	Contact::unset()
 	return false;
 }
 
-std::string trim(const std::string& str)
+static std::string trim(const std::string& str)
 {
     size_t start = str.find_first_not_of(" \t\n\r");
     size_t end = str.find_last_not_of(" \t\n\r");
@@ -30,8 +30,7 @@ std::string trim(const std::string& str)
 bool	Contact::set_contact()
 {
 	std::cout << "Enter First Name: " << std::endl;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-	std::getline(std::cin, first_name); // it directly modifies the existing class attribute.
+	std::getline(std::cin, first_name);
 	first_name = trim(first_name);
 	if (first_name.empty())
 		return unset(); // unset fucntion returns false
@@ -40,25 +39,25 @@ bool	Contact::set_contact()
 	std::getline(std::cin, last_name);
 	last_name = trim(last_name);
 	if (last_name.empty())
-		return unset(); // unset fucntion returns false
+		return unset();
 
 	std::cout << "Enter Nickname: " << std::endl;
 	std::getline(std::cin, nickname);
 	nickname = trim(nickname);
 	if (nickname.empty())
-		return unset(); // unset fucntion returns false
+		return unset();
 
 	std::cout << "Enter Phone Number: " << std::endl;
 	std::getline(std::cin, phone_number);
 	phone_number = trim(phone_number);
 	if (phone_number.empty())
-		return unset(); // unset fucntion returns false
+		return unset();
 
 	std::cout << "Enter Darkest Secret: " << std::endl;
 	std::getline(std::cin, darkest_secret);
 	darkest_secret = trim(darkest_secret);
 	if (darkest_secret.empty())
-		return unset(); // unset fucntion returns false
+		return unset();
 
 	std::cout << "Contact added!" << std::endl;
 	return true;
@@ -99,10 +98,6 @@ void	Contact::truncate_and_or_display(std::string info_code)
 	}
 	else
 		std::cout << std::setw(10);
-	/* {
-		while (info_to_display.length() < 10)
-            info_to_display = " " + info_to_display;
-	} */
 	
 	std::cout << info_to_display;
 }

@@ -10,7 +10,7 @@ int	main()
 	while(running)
 	{
 		std::cout << "Please enter one of the three commands: ADD, SEARCH, EXIT" << std::endl;
-		std::cin >> command;
+		std::getline(std::cin, command);
 		
 		if (command == "ADD")
 			phonebook.add_contact();
@@ -19,7 +19,7 @@ int	main()
 		else if (command == "EXIT")
 			running = false;
 		else
-			std::cout << "Invalid command." << std::endl;
+			std::cout << "Invalid command." << std::endl << std::endl;
 	}	
 
 	return 0;
