@@ -1,9 +1,7 @@
 #include <iostream>
 
 #ifndef WEAPON_H
-#define WAEPON_H
-
-#pragma once
+#define WEAPON_H
 
 #include <string>
 
