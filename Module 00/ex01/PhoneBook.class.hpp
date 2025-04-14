@@ -3,7 +3,6 @@
 
 #include "Contact.class.hpp"
 #include <sstream>
-#include <stdlib.h>
 
 class PhoneBook {
 	private:
