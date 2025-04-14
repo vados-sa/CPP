@@ -1,4 +1,3 @@
-//#include "Weapon.hpp"
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 
@@ -14,9 +13,9 @@ int main()
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
-		jim.setWeapon(club); // change using pointer - doesn't exits at first.
+		jim.setWeapon(club); // change using pointer - doesn't exist at first.
 		jim.attack();
-		club.setType("some other type of club"); // it's not being set
+		club.setType("some other type of club");
 		jim.attack();
 	}
 
