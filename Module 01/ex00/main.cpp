@@ -6,12 +6,12 @@ int	main()
 	
 	while(true) // randomChump
 	{
-		std::cout << "Enter a name for your random chump: ";
+		std::cout << "Enter a name for your random Chump: ";
 		std::getline(std::cin, name);
 		name = trim(name);
 		if(name.empty())
 		{
-			std::cout << "Please enter a valid name for your random chump." << std::endl;
+			std::cout << "Empty names are not valid. Please try again." << std::endl;
 			continue ;
 		}
 		randomChump(name);
@@ -23,7 +23,7 @@ int	main()
 		std::getline(std::cin, name);
 		if(name.empty())
 		{
-			std::cout << "Please enter a valid name for your random chump." << std::endl;
+			std::cout << "Empty names are not valid. Please try again." << std::endl;
 			continue ;
 		}
 		Zombie *zombie = newZombie(name);
