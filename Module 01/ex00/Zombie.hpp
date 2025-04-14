@@ -1,7 +1,7 @@
-#include <iostream>
-
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
+
+#include <iostream>
 
 class Zombie {
 	private:
@@ -13,7 +13,7 @@ class Zombie {
 		void announce(void);
 };
 
-#endif
-
 void randomChump( std::string name );
 Zombie* newZombie( std::string name );
+
+#endif
