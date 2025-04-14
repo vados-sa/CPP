@@ -1,20 +1,21 @@
-#include <stdio.h>
-#include <iostream>
-
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
+#include <iostream>
+
 class Zombie {
-	private: // can oly be accessed or modified by methods of the Zombie class.
-		std::string name; // data - name attribute
+	private:
+		std::string name;
 	
 	public:
 		Zombie();
-		~Zombie(); // destructor
+		~Zombie();
 		void setName(std::string new_name);
-		void announce(void); // behavior - announce method
+		void announce(void);
 };
 
-#endif
-
 Zombie* zombieHorde( int N, std::string name );
+std::string trim(const std::string& str);
+unsigned int get_zombies_amount();
+
+#endif

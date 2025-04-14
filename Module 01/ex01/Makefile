@@ -1,7 +1,7 @@
 NAME = Moar_brainz!
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp Zombie.cpp zombieHorde.cpp
+SRCS = main.cpp Zombie.cpp zombieHorde.cpp utils.cpp
 OBJ_DIR = obj
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 

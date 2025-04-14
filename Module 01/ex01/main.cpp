@@ -2,23 +2,27 @@
 
 int	main()
 {
-	int N;
-	std::cout << "Enter the amount of zombies: ";
-	std::cin >> N;
-	if (N <= 0)
-	{
-		std::cout << "Invalid number of zombies." << std::endl;
-		return 1;
-	}
+	unsigned int n = get_zombies_amount();
 	
 	std::string name;
 	std::cout << "Enter the name of the zombies: ";
-	std::cin >> name;
+	while(true)
+	{
+		std::getline(std::cin, name);
+		name = trim(name);
+		if(name.empty())
+		{
+			std::cout << "Empty names are not valid. Please try again." << std::endl;
+			continue ;
+		}
+		break ;
+	}
+	
 	std::cout << std::endl;
 
-	Zombie *zombie = zombieHorde(N, name);
+	Zombie *zombie = zombieHorde(n, name);
 
-	for (int i = 0; i < N; i++)
+	for (unsigned int i = 0; i < n; i++)
 		zombie[i].announce();
 
 	std::cout << std::endl;
