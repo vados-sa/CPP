@@ -23,7 +23,7 @@ bool FileReplacer::process_file()
 		}
 		
 		// open file
-		std::ifstream input_stream(filename);
+		std::ifstream input_stream(filename.c_str()); // get a cont char* representation of the string
 		if (!input_stream)
 		{
 			std::cerr << "Error: Could not open " << filename << std::endl;
@@ -32,8 +32,9 @@ bool FileReplacer::process_file()
 		
 		// create output file
 		std::string output_filename = filename + ".replace";
-		std::ofstream output_stream (output_filename);
-		if (!output_stream) {
+		std::ofstream output_stream (output_filename.c_str());
+		if (!output_stream)
+		{
 			std::cerr << "Error: Could not create " << output_filename << std::endl;
 			return false;
 		}
