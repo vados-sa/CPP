@@ -3,9 +3,8 @@
 int	main()
 {
 	std::string name;
-	bool		iterate = true;
 	
-	while(iterate) // randomChump
+	while(true) // randomChump
 	{
 		std::cout << "Enter a name for your random chump: ";
 		std::getline(std::cin, name);
@@ -16,10 +15,9 @@ int	main()
 			continue ;
 		}
 		randomChump(name);
-		iterate = false;
+		break ;
 	}
-	iterate = true;
-	while(iterate) // newZombie
+	while(true) // newZombie
 	{
 		std::cout << "Enter a name for your new Zombie: ";
 		std::getline(std::cin, name);
@@ -31,7 +29,7 @@ int	main()
 		Zombie *zombie = newZombie(name);
 		zombie->announce();
 		delete zombie;
-		iterate = false;
+		break ;
 	}
 
 	return 0;
