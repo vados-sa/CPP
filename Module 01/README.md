@@ -1,7 +1,7 @@
 **Memory allocation, pointers to members,
 references and switch statements.**
 
-# Concepts introduced:
+## Concepts introduced:
 ## ex00
 **Memory Allocation**
 - `new` & `delete`;
