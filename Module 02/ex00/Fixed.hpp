@@ -2,6 +2,7 @@
 #define FIXED_H
 
 #include <iostream>
+#include <cmath>
 
 class Fixed {
 private:
@@ -10,8 +11,8 @@ private:
 
 public:
 	Fixed(); // default constructor
-	Fixed(const Fixed &other); // copy constructor
-	Fixed &whatevergoeshere(const Fixed &other); // copy assignment operator overload
+	Fixed(const Fixed& other); // copy constructor
+	Fixed& operator = (const Fixed& other); // copy assignment operator overload
 	~Fixed(); // destructor
 	int getRawBits( void ) const; // returns the raw value of the fixed-point value.
 	void setRawBits( int const raw ); // setd the raw value of the fixed-point number.
