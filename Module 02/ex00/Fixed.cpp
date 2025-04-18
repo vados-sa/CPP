@@ -18,7 +18,7 @@ Fixed& Fixed::operator = (const Fixed &other) // copy assignment operator overlo
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other) // avoid self-assignment
 		this->fixed_point = other.fixed_point;
-	this->getRawBits();
+	this->getRawBits(); // no purpose, but it prints getRawBits debug message
 	return *this;
 }
 
