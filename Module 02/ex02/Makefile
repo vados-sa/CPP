@@ -1,7 +1,7 @@
 NAME = now_were_talking
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp tests.cpp
 OBJ_DIR = obj
 OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 

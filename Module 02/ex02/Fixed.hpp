@@ -40,8 +40,8 @@ public:
 	Fixed operator/(const Fixed& obj) const;
 
 	// Increment / Decrement
-	Fixed& operator++();    // prefix return by reference
-	Fixed operator++(int);  // postfix returns a copy. `int` is a dummy argument
+	Fixed& operator++();    // prefix version
+	Fixed operator++(int);  // postfix version (dummy int parameter)
 	Fixed& operator--();
 	Fixed operator--(int);
 

@@ -132,6 +132,17 @@ Fixed Fixed::operator/(const Fixed& obj) const
 
 
 // Increment / Decrement
+/*   The prefix version increments or decrements the value 
+before returning the object. It modifies the object in place 
+and returns a reference to the same object.
+Returning a reference avoids creating a copy of the object, 
+which is more efficient.
+
+	The postfix version increments or decrements the value 
+after returning the object. It returns the value of the object 
+before the increment or decrement.
+Since the value before the increment/decrement is needed, a 
+copy  of the object must be made to preserve the original state. */
 
 Fixed& Fixed::operator++()
 {
@@ -140,13 +151,13 @@ Fixed& Fixed::operator++()
 	return *this;
 }
 
-Fixed Fixed::operator++(int)
+Fixed Fixed::operator++(int) // `int` is a dummy argument used to differentiate it from prefix version
 {
 	Fixed tmp = *this;;
 
 	++(*this);
 	return tmp;
-}  // postfix returns a copy. `int` is a dummy argument
+}
 
 Fixed& Fixed::operator--()
 {
@@ -166,25 +177,25 @@ Fixed Fixed::operator--(int)
 // Min / Max
 
 //  returns a reference to the smallest one.
-static Fixed& min(Fixed& a, Fixed& b)
+Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
 	return (a.getRawBits() < b.getRawBits()) ? a : b;
 } 
 
 //  returns a reference to the smallest one.
-static const Fixed& min(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
 	return (a.getRawBits() < b.getRawBits()) ? a : b;
 } 
 
 // returns a reference to the greatest one.
-static Fixed& max(Fixed& a, Fixed& b)
+Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
 	return (a.getRawBits() > b.getRawBits()) ? a : b;
 } 
 
 // returns a reference to the greatest one.
-static const Fixed& max(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
 	return (a.getRawBits() > b.getRawBits()) ? a : b;
 } 

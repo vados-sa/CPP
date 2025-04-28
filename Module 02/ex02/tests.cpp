@@ -1,60 +1,78 @@
 #include "Fixed.hpp"
 
-void test_comparision(void)
+void test_comparison_operators()
 {
-	Fixed a(10);
-	Fixed b(5);
+    Fixed a(10);
+    Fixed b(5);
+    Fixed c(10);
 
-	if (a > b)
-	    std::cout << "a is greater than b" << std::endl;
-	
-	if (a < b)
-	    std::cout << "a is smaller than b" << std::endl;
-	
-	if (a >= b)
-	    std::cout << "a is greater equal b" << std::endl;
+    std::cout << "Testing Comparison Operators:" << std::endl;
 
-	if (a <= b)
-	    std::cout << "a is smaller equal b" << std::endl;
+    std::cout << "a > b: " << (a > b) << std::endl;
+    std::cout << "a < b: " << (a < b) << std::endl;
+    std::cout << "a >= b: " << (a >= b) << std::endl;
+    std::cout << "a <= b: " << (a <= b) << std::endl;
+    std::cout << "a == b: " << (a == b) << std::endl;
+    std::cout << "a == c: " << (a == c) << std::endl;
+    std::cout << "a != b: " << (a != b) << std::endl;
+    std::cout << "a != c: " << (a != c) << std::endl;
 
-	if (a == b)
-	    std::cout << "a is equal b" << std::endl;
-
-	if (a != b)
-	    std::cout << "a is different than b" << std::endl;
+    std::cout << std::endl;
 }
 
-void test_arithmetic(void)
+void test_arithmetic_operators()
 {
-	Fixed a(10);
-	Fixed b(5);
+    Fixed a(10);
+    Fixed b(5);
 
-	std::cout << "Addition: " << a + b << std::endl;
-	std::cout << "Subtraction: " << a - b << std::endl;
-	std::cout << "Multiplication: " << a * b << std::endl;
-	std::cout << "Division: " << a / b << std::endl;
+    std::cout << "Testing Arithmetic Operators:" << std::endl;
+
+    std::cout << "a + b: " << (a + b) << std::endl;
+    std::cout << "a - b: " << (a - b) << std::endl;
+    std::cout << "a * b: " << (a * b) << std::endl;
+    std::cout << "a / b: " << (a / b) << std::endl;
+
+    std::cout << std::endl;
 }
 
-void test_increment_decrement(void)
+void test_increment_decrement_operators()
 {
-	Fixed a;
+    Fixed a;
 
-	std::cout << a << std::endl;
-	
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
+    std::cout << "Testing Increment/Decrement Operators:" << std::endl;
 
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
+    std::cout << "Initial value: " << a << std::endl;
 
-	std::cout << --a << std::endl;
-	std::cout << a << std::endl;
+    std::cout << "++a: " << ++a << std::endl;
+    std::cout << "a: " << a << std::endl;
 
-	std::cout << a-- << std::endl;
-	std::cout << a << std::endl;
+    std::cout << "a++: " << a++ << std::endl;
+    std::cout << "a: " << a << std::endl;
+
+    std::cout << "--a: " << --a << std::endl;
+    std::cout << "a: " << a << std::endl;
+
+    std::cout << "a--: " << a-- << std::endl;
+    std::cout << "a: " << a << std::endl;
+
+    std::cout << std::endl;
 }
 
-void test_min_max(void)
+void test_min_max_functions()
 {
-	
+    Fixed a(10);
+    Fixed b(5);
+
+    std::cout << "Testing Min/Max Functions:" << std::endl;
+
+    std::cout << "Min(a, b): " << Fixed::min(a, b) << std::endl;
+    std::cout << "Max(a, b): " << Fixed::max(a, b) << std::endl;
+
+    const Fixed c(20);
+    const Fixed d(15);
+
+    std::cout << "Min(c, d): " << Fixed::min(c, d) << std::endl;
+    std::cout << "Max(c, d): " << Fixed::max(c, d) << std::endl;
+
+    std::cout << std::endl;
 }
