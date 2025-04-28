@@ -1,13 +1,14 @@
 ** Ad-hoc polymorphism, operator overloading
 and the Orthodox Canonical class form ** 
 
-# The Orthodox Canonical class form
+# ex00 & ex01
+## The Orthodox Canonical class form
 ### Default Constructor
 `Class();`
 
 Member function that it's called to initialize an object with default values when an object is instatiated.
 ### Parameterized Constructor
-(Not mandatory for the canonical form)
+(Apparently not mandatory for the canonical form)
 
 `Class(data_type parameter1, data_type parameter2, ...)`
 
@@ -28,20 +29,8 @@ Assigns the value of one object to another already-existing object.
 It's called when an object goes out of scope or is specifically deleted.
 It is used to clean up resources.
 
-# Operator Overloading
-Operators are predefined to operate on variables of built-in data type only. For example: ` int a; float b, sum; sum = a + b; `.
 
-Trying to add two objects that are of user-defined type using "+" operator would not be allowed.
-
-Now, if the user wants to make the operator “+” add two class objects, the user has to redefine the meaning of the “+” operator such that it adds two class objects. This is done by using the concept of “Operator overloading”. So the main idea behind “Operator overloading” is to use C++ operators with class variables or class objects. Redefining the meaning of operators really does not change their original meaning; instead, they have been given additional meaning along with their existing ones.
-
-` Interger& operator=( Interger const & rhs ); `
-
-` Interger operator+( Interger const & rhs ) const; `
-
-**An operator overloading fucntion teaches C++ what the operator should do for a specific class.**
-
-# Fixed-Point
+## Fixed-Point
 Fixed-point is a number type that stores real (decimal) numbers using integers, by dedicating a fixed number of bits to represent the **fractional part**. It offers a balance between the wide range of integers and the precision of floating-point numbers.
 
 Fixed-point is especially useful in:
@@ -76,4 +65,22 @@ Convert the fixed-point integer to a float, then divide by 2^n:
 
 `float_value = static_cast<float>(fixed_point) / (1 << fractional_bits);` This restores the real number with decimal precision.
 
+# ex02
+## Operator Overloading
+Operators are predefined to operate on variables of built-in data type only. For example: ` int a; float b, sum; sum = a + b; `.
 
+Trying to add two objects that are of user-defined type using "+" operator would not be allowed.
+
+Now, if the user wants to make the operator “+” add two class objects, the user has to redefine the meaning of the “+” operator such that it adds two class objects. This is done by using the concept of “Operator overloading”. So the main idea behind “Operator overloading” is to use C++ operators with class variables or class objects. Redefining the meaning of operators really does not change their original meaning; instead, they have been given additional meaning along with their existing ones.
+
+` Interger& operator=( Interger const & rhs ); `
+
+` Interger operator+( Interger const & rhs ) const; `
+
+**An operator overloading function teaches C++ what the operator should do for a specific class.**
+
+## Static Functions in a Class
+Static functions in a class are functions that belong to the class itself rather than to any specific instance of the class. This is in contrast to non-static functions, which operate on a specific instance of the class.
+- A static function is associated with the class itself, not with any particular object of the class.
+- Static functions do not have access to the this pointer because they are not tied to any specific instance of the class.
+- Static functions can only access other static members (both variables and functions) of the class. They cannot directly access non-static members because those require an instance of the class.
