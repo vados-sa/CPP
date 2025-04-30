@@ -79,6 +79,9 @@ Now, if the user wants to make the operator “+” add two class objects, the u
 
 **An operator overloading function teaches C++ what the operator should do for a specific class.**
 
+### Ad-hoc polymorphism 
+It refers to the ability of functions or operators to operate on different types of data in a way that is specific to each type. It is a form of polymorphism where the behavior of a function or operator is determined by the type of its arguments. This is achieved through **function overloading** and **operator overloading** in C++.
+
 ## Static Functions in a Class
 Static functions in a class are functions that belong to the class itself rather than to any specific instance of the class. This is in contrast to non-static functions, which operate on a specific instance of the class.
 - A static function is associated with the class itself, not with any particular object of the class.
