@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "Constructor called for " << name << "." << std::endl; 
+	std::cout << "Clap Trap Constructor called for " << name << "." << std::endl; 
 	this->name = name;
 	hit_points = 10;
 	energy_points = 10;
@@ -28,7 +28,7 @@ ClapTrap::~ClapTrap()
 {
 	if (energy_points > 0 && hit_points > 0)
 		std::cout << name << " is still alive!" << std::endl;
-	std::cout << "Destructor called on " << name << "." << std::endl; 
+	std::cout << "Clap Trap Destructor called on " << name << "." << std::endl; 
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -42,7 +42,7 @@ void ClapTrap::attack(const std::string& target)
 		return ;
 	}
 
-	std::cout << "ClapTrap " << name << " attacks " << target << ", causing it to lose points of damage!" << std::endl;
+	std::cout << "ClapTrap " << name << " attacks " << target << ", causing it to lose points of damage!" << std::endl; // change it to print attack damage
 	energy_points--;
 }
 void ClapTrap::takeDamage(unsigned int amount)
