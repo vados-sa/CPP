@@ -1,5 +1,10 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap()
+{
+	std::cout << "Clap Trap Default constructor called." << std::endl; 
+}
+
 ClapTrap::ClapTrap(std::string name)
 {
 	std::cout << "Clap Trap Constructor called for " << name << "." << std::endl; 
@@ -26,8 +31,6 @@ ClapTrap& ClapTrap::operator = (const ClapTrap &other) // copy assignment operat
 
 ClapTrap::~ClapTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Clap Trap Destructor called on " << name << "." << std::endl; 
 }
 

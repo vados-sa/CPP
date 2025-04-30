@@ -1,5 +1,10 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap()
+{
+	std::cout << "Scav Trap Default constructor called." << std::endl; 
+}
+
 ScavTrap::ScavTrap(std::string name) // I'm not yet sure that's the right way.
 	:ClapTrap(name)
 {
@@ -11,8 +16,6 @@ ScavTrap::ScavTrap(std::string name) // I'm not yet sure that's the right way.
 
 ScavTrap::~ScavTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Scav Trap Destructor called on " << name << "." << std::endl; 
 }
 

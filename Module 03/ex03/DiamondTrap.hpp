@@ -5,11 +5,12 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap // maybe it should be private
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 private:
 	std::string name;
 public:
+	DiamondTrap();
 	DiamondTrap(std::string name); // constructor
 	DiamondTrap(const DiamondTrap& other); // copy constructor
 	DiamondTrap& operator = (const DiamondTrap& other); // copy assignment operator overload

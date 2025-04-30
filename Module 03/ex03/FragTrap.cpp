@@ -1,5 +1,10 @@
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap()
+{
+	std::cout << "Frag Trap Default constructor called." << std::endl; 
+}
+
 FragTrap::FragTrap(std::string name) // I'm not yet sure that's the right way.
 	:ClapTrap(name)
 {
@@ -11,8 +16,6 @@ FragTrap::FragTrap(std::string name) // I'm not yet sure that's the right way.
 
 FragTrap::~FragTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Frag Trap Destructor called on " << name << "." << std::endl; 
 }
 
