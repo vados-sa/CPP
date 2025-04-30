@@ -8,6 +8,7 @@ class ScavTrap : public ClapTrap // maybe it should be private
 {
 //private:
 public:
+	ScavTrap();
 	ScavTrap(std::string name); // constructor
 	ScavTrap(const ScavTrap& other); // copy constructor
 	ScavTrap& operator = (const ScavTrap& other); // copy assignment operator overload

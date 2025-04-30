@@ -12,6 +12,7 @@ private:
 	int			attack_damage;
 
 public:
+	ClapTrap();
 	ClapTrap(std::string name); // constructor
 	ClapTrap(const ClapTrap& other); // copy constructor
 	ClapTrap& operator = (const ClapTrap& other); // copy assignment operator overload
