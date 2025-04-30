@@ -1,59 +1,40 @@
 #include "ClapTrap.hpp"
 
-
-// Make better tests !!
-
-/* int	main() // no hit points left
+int main()
 {
-	ClapTrap Vault("Vault");
-	ClapTrap Jack("Jack");
+    std::cout << "=== Creating ClapTraps ===" << std::endl;
+    ClapTrap clap1("Clappy");
+    ClapTrap clap2("Trappy");
 
-	if (Jack.getHitPoints() > 0 && Jack.getEnergyPoints() > 0)
-	Jack.attack("Vault");
-	if (Vault.getHitPoints() > 0 && Jack.getHitPoints() > 0 && Jack.getEnergyPoints() > 0)
-		Vault.takeDamage(4);
+    std::cout << "\n=== Testing ClapTrap Attributes ===" << std::endl;
+    std::cout << "ClapTrap 1 Name: " << "Clappy" << std::endl;
+    std::cout << "Hit Points: " << clap1.getHitPoints() << std::endl;
+    std::cout << "Energy Points: " << clap1.getEnergyPoints() << std::endl;
 
-	if (Vault.getHitPoints() > 0 && Vault.getEnergyPoints() > 0)
-		Vault.attack("Jack");
-		Jack.takeDamage(6);
+    std::cout << "\n=== Testing ClapTrap Actions ===" << std::endl;
+    clap1.attack("Target Dummy");
+    clap1.takeDamage(5);
+    clap1.beRepaired(3);
 
-		Jack.beRepaired(6);
-		if (Va && 
-	Vault.attack("Jack > 0ult.getHitPoints() > 0 && Vault.getEnergyPoints() > 0)
-{
-		}
+    std::cout << "\n=== Testing ClapTrap Energy Depletion ===" << std::endl;
+    for (int i = 0; i < 10; i++) {
+        clap1.attack("Target Dummy");
+    }
+    clap1.attack("Target Dummy"); // Should fail due to 0 energy points
 
-	Vault.attack("Jack");
-		Jack.takeDamage(4);
-	if (Jack.getHitPoints() > 0 && Jack.getEnergyPoi && 
-		Vault.takeDamage( > 0nts() > 0)
-		if (Vault.getHitPoints() > 0 && Jack.getHitPoints() > 0 && Jack.getEnergyPoints() > 0)
-{
-		}
-		Jack.attack("Vault");
-		Vault.takeDamage(6);
-Vault.beRepaired(10); // should not be able to 
+    std::cout << "\n=== Testing ClapTrap Death ===" << std::endl;
+    clap1.takeDamage(20); // Should reduce hit points to 0
+    clap1.attack("Target Dummy"); // Should fail due to 0 hit points
+    clap1.beRepaired(5); // Should fail due to 0 hit points
 
-	return 0;
-} */
+    std::cout << "\n=== Testing ClapTrap Copy Constructor ===" << std::endl;
+    ClapTrap clap3(clap2); // Copy constructor
 
-int	main() // no energy points left
-{
-	ClapTrap Vault("Vault");
-	ClapTrap Jack("Jack");
+    std::cout << "\n=== Testing ClapTrap Copy Assignment ===" << std::endl;
+    ClapTrap clap4("Temporary");
+    clap4 = clap2; // Copy assignment operator
 
-	if (Vault.getHitPoints() > 0 && Vault.getEnergyPoints() > 0 && Jack.getHitPoints() > 0)
-	{	
-		Vault.attack("Jack");
-		Jack.takeDamage(1);
-	}
-	if (Jack.getHitPoints() > 0 && Jack.getEnergyPoints() > 0 && Vault.getHitPoints() > 0)
-	{
-		Jack.attack("Vault");
-		Vault.takeDamage(1);
+    std::cout << "\n=== Destroying ClapTraps ===" << std::endl;
 
-	}
-
-	return 0;
-
+    return 0;
 }
