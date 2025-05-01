@@ -4,9 +4,8 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap // maybe it should be private
+class ScavTrap : public ClapTrap
 {
-//private:
 public:
 	ScavTrap();
 	ScavTrap(std::string name); // constructor

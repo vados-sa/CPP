@@ -14,17 +14,17 @@ ClapTrap::ClapTrap(std::string name)
 	attack_damage = 0;
 }
 
-ClapTrap::ClapTrap (const ClapTrap& other) // copy constructor
+ClapTrap::ClapTrap (const ClapTrap& other)
 	: name(other.name)
 {
 	std::cout << "Copy constructor called" << std::endl;
 
 }
 
-ClapTrap& ClapTrap::operator = (const ClapTrap &other) // copy assignment operator overload
+ClapTrap& ClapTrap::operator = (const ClapTrap &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &other) // avoid self-assignment
+	if (this != &other)
 		this->name = other.name;
 	return *this;
 }

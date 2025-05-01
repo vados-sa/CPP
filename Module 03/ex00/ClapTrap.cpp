@@ -14,25 +14,23 @@ ClapTrap::ClapTrap(std::string name)
 	attack_damage = 0;
 }
 
-ClapTrap::ClapTrap (const ClapTrap& other) // copy constructor
+ClapTrap::ClapTrap (const ClapTrap& other)
 	: name(other.name)
 {
 	std::cout << "Copy constructor called" << std::endl;
 
 }
 
-ClapTrap& ClapTrap::operator = (const ClapTrap &other) // copy assignment operator overload
+ClapTrap& ClapTrap::operator = (const ClapTrap &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &other) // avoid self-assignment
+	if (this != &other)
 		this->name = other.name;
 	return *this;
 }
 
 ClapTrap::~ClapTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Destructor called on " << name << "." << std::endl; 
 }
 
@@ -50,6 +48,7 @@ void ClapTrap::attack(const std::string& target)
 	std::cout << "ClapTrap " << name << " attacks " << target << ", causing it to lose points of damage!" << std::endl;
 	energy_points--;
 }
+
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (hit_points == 0)
