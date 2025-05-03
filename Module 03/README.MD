@@ -17,6 +17,6 @@ New encapsulation level that will only be used for heritage. It's similar to `pr
 <img src="Screenshot.png" alt="encapsulation comparision table" width="400"/>
 
 ### ex03 - Diamond Problem
-Ambiguities are caused because the grandparent class will have to copies.
+Ambiguities are caused because the grandparent class will have two copies.
 
 `virtual` keyword fixes the issue.
