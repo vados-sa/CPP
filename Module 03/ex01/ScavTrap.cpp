@@ -32,8 +32,6 @@ ScavTrap& ScavTrap::operator = (const ScavTrap &other)
 
 ScavTrap::~ScavTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Scav Trap Destructor called on " << name << "." << std::endl; 
 }
 
