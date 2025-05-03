@@ -10,7 +10,7 @@ FragTrap::FragTrap(std::string name)
 {
 	std::cout << "Frag Trap Constructor called for " << name << "." << std::endl; 
 	hit_points = 100;
-	energy_points = 100;
+	//energy_points = 100;
 	attack_damage = 30;
 }
 
