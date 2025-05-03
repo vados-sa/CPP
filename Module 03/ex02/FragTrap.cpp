@@ -32,8 +32,6 @@ FragTrap& FragTrap::operator = (const FragTrap &other)
 
 FragTrap::~FragTrap()
 {
-	if (energy_points > 0 && hit_points > 0)
-		std::cout << name << " is still alive!" << std::endl;
 	std::cout << "Frag Trap Destructor called on " << name << "." << std::endl; 
 }
 
