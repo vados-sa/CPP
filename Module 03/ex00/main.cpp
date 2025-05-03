@@ -7,7 +7,7 @@ int main()
     ClapTrap clap2("Trappy");
 
     std::cout << "\n=== Testing ClapTrap Attributes ===" << std::endl;
-    std::cout << "ClapTrap 1 Name: " << "Clappy" << std::endl;
+    std::cout << "ClapTrap Name: " << "Clappy" << std::endl;
     std::cout << "Hit Points: " << clap1.getHitPoints() << std::endl;
     std::cout << "Energy Points: " << clap1.getEnergyPoints() << std::endl;
 
@@ -26,13 +26,6 @@ int main()
     clap1.takeDamage(20); // Should reduce hit points to 0
     clap1.attack("Target Dummy"); // Should fail due to 0 hit points
     clap1.beRepaired(5); // Should fail due to 0 hit points
-
-    std::cout << "\n=== Testing ClapTrap Copy Constructor ===" << std::endl;
-    ClapTrap clap3(clap2); // Copy constructor
-
-    std::cout << "\n=== Testing ClapTrap Copy Assignment ===" << std::endl;
-    ClapTrap clap4("Temporary");
-    clap4 = clap2; // Copy assignment operator
 
     std::cout << "\n=== Destroying ClapTraps ===" << std::endl;
 
