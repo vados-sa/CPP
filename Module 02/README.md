@@ -67,6 +67,8 @@ Convert the fixed-point integer to a float, then divide by 2^n:
 
 # ex02
 ## Operator Overloading
+Generally, operators like +, -, etc. does not work for user defined classes as they don’t know what to do with them. Operator overloading allows us to define the behaviour of such operators for user defined data types.
+
 Operators are predefined to operate on variables of built-in data type only. For example: ` int a; float b, sum; sum = a + b; `.
 
 Trying to add two objects that are of user-defined type using "+" operator would not be allowed.

@@ -1,5 +1,4 @@
-#ifndef ANIMAL_H
-#define ANIMAL_H
+#pragma once
 
 #include <iostream>
 
@@ -11,9 +10,8 @@ class Animal
 		Animal();
 		Animal(const Animal& other);
 		Animal& operator = (const Animal& other);
-		~Animal();
+		virtual ~Animal();
 
-		void makeSound(); // print animal's aproriate sound
+		virtual void makeSound() const; // print animal's aproriate sound
+		std::string getType() const;
 };
-
-#endif
