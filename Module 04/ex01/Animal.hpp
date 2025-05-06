@@ -14,4 +14,5 @@ class Animal
 
 		virtual void makeSound() const; // print animal's aproriate sound
 		std::string getType() const;
+		//void setType(std::string type);
 };
