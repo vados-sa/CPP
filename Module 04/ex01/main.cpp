@@ -43,7 +43,7 @@ void deepCopyTests()
 	std::cout << std::endl;
 	
 	Cat cat3;
-	cat3.getBrain()->setIdea(0, "Hunt a moth");
+	cat3.getBrain()->setIdea(0, "Sleep on rug");
     std::cout << "Cat3 Brain Idea[0] (before assigment): " << cat3.getBrain()->getIdea(0) << std::endl;
 	std::cout << std::endl;
 
