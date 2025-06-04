@@ -16,13 +16,19 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 	try
 	{
 		if (grade < 1)
-		throw std::out_of_range(GradeTooHighException());
+		throw Bureaucrat::GradeTooHighException();
 		if (grade > 150)
-		throw std::out_of_range(GradeTooLowException());
+		throw Bureaucrat::GradeTooLowException();
 	}
-	catch(const std::out_of_range& e)
+	catch(Bureaucrat::GradeTooHighException& e)
 	{
 		std::cout << e.what() << std::endl;
+		setGrade(1);
+	}
+	catch(Bureaucrat::GradeTooLowException& e)
+	{
+		std::cout << e.what() << std::endl;
+		setGrade(150);
 	}
 }
 
@@ -48,18 +54,15 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "Destructor called for " << this->name << std::endl;
 }
 
-std::string Bureaucrat::GradeTooHighException()
+
+const char* Bureaucrat::GradeTooHighException::what() const  throw()
 {
-	//std::cout << "Highest grade possible: 1." << std::endl;
-	setGrade(1);
-	return "Highest grade possible: 1.";
+	return "Grade too high error: Highest grade possible: 1.";
 }
 
-std::string Bureaucrat::GradeTooLowException()
+const char* Bureaucrat::GradeTooLowException::what() const  throw()
 {
-	//std::cout << "Lowest grade possible: 150." << std::endl;
-	setGrade(150);
-	return "Lowest grade possible: 150.";
+	return "Grade too low error: Lowest grade possible: 150." ;
 }
 
 std::string Bureaucrat::getName() const
@@ -84,11 +87,12 @@ void Bureaucrat::incrementGrade()
 	try
 	{
 		if (grade < 1)
-		throw std::out_of_range(GradeTooHighException());
+		throw Bureaucrat::GradeTooHighException();
 	}
-	catch(const std::out_of_range& e)
+	catch(Bureaucrat::GradeTooHighException& e)
 	{
 		std::cout << e.what() << std::endl;
+		setGrade(1);
 	}	
 }
 
@@ -99,11 +103,12 @@ void Bureaucrat::decrementGrade()
 	try
 	{
 		if (grade > 150)
-		throw std::out_of_range(GradeTooLowException());
+		throw Bureaucrat::GradeTooLowException();
 	}
-	catch(const std::out_of_range& e)
+	catch(Bureaucrat::GradeTooLowException& e)
 	{
 		std::cout << e.what() << std::endl;
+		setGrade(150);
 	}
 }
 
