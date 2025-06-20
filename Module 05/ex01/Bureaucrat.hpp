@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
 
 class Bureaucrat {
 	private:
@@ -28,6 +29,8 @@ class Bureaucrat {
 				public:
 					virtual const char* what() const throw();
 			};
+
+			void signForm(Form& form);
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj);

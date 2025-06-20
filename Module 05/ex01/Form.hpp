@@ -2,9 +2,10 @@
 
 #include <string>
 #include <iostream>
-#include "Bureaucrat.hpp"
 
-class Form : public Bureaucrat{
+class Bureaucrat;
+
+class Form {
 	private:
 		const		std::string name;
 		bool		isSigned;
@@ -12,8 +13,27 @@ class Form : public Bureaucrat{
 		const int	gradeExec;
 
 	public:
-		//OCF
-		//getters
+		Form();
+		Form(std::string name, bool isSigned, int gradeSign, int gradeExec);
+		Form(const Form& other);
+		Form& operator=(const Form& other);
+		~Form();
+		
+		std::string getName() const;
+		bool getSign() const;
+		int getGradeSign() const;
+		int getGradeExec() const;
 
 		void beSigned(Bureaucrat Bureaucrat);
+
+		class GradeTooHighException : public std::exception{
+			public:
+				virtual const char* what() const throw();
+		};
+		class GradeTooLowException : public std::exception{
+			public:
+				virtual const char* what() const throw();
+		};
 };
+
+std::ostream& operator<<(std::ostream& out, const Form& obj);

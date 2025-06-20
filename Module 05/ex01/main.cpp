@@ -1,26 +1,53 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main()
 {
-	Bureaucrat b1("Donatelo", 42);
-	Bureaucrat b2("Leonardo", 151);
-	Bureaucrat b3("Raphael", 0);
-	Bureaucrat b4("Michelangelo", 42);
+	// Test valid form creation and signing
+    try {
+        Bureaucrat alice("Alice", 42);
+        Form taxForm("TaxForm", false, 50, 100);
 
-	std::cout << b1;
-	std::cout << b2;
-	std::cout << b3;
-	std::cout << b4;
-	
-	b1.incrementGrade();
-	b2.decrementGrade();
-	b3.incrementGrade();
-	b4.decrementGrade();
+        std::cout << alice << std::endl;
+        std::cout << taxForm << std::endl;
 
-	std::cout << b1;
-	std::cout << b2;
-	std::cout << b3;
-	std::cout << b4;
+        alice.signForm(taxForm); // Should succeed
+        std::cout << "Form signed status: " << taxForm.getSign() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
 
-	return 0;
+    std::cout << "\n---\n" << std::endl;
+
+    // Test signing with too low grade
+    try {
+        Bureaucrat bob("Bob", 120);
+        Form secretForm("SecretForm", false, 50, 100);
+
+        std::cout << bob << std::endl;
+        std::cout << secretForm << std::endl;
+
+        bob.signForm(secretForm); // Should fail
+        std::cout << "Form signed status: " << secretForm.getSign() << std::endl;
+    } catch (std::exception &e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    std::cout << "\n---\n" << std::endl;
+
+    // Test invalid form creation (grade too high)
+    try {
+        Form badForm("BadForm", false, 0, 100);
+    } catch (std::exception &e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    // Test invalid form creation (grade too low)
+    try {
+        Form badForm2("BadForm2", false, 151, 100);
+    } catch (std::exception &e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    return 0;
 }
