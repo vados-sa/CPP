@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 class Bureaucrat {
 	private:
@@ -20,6 +20,7 @@ class Bureaucrat {
 			void setGrade(int n);
 			void incrementGrade();
 			void decrementGrade();
+			void executeForm(AForm const & form) const;
 
 			class GradeTooHighException : public std::exception{
 				public:
@@ -30,7 +31,7 @@ class Bureaucrat {
 					virtual const char* what() const throw();
 			};
 
-			void signForm(Form& form);
+			void signForm(AForm& form);
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj);
