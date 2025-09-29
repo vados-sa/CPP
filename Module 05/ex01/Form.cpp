@@ -29,7 +29,7 @@ Form& Form::operator=(const Form& other) {
 }
 
 Form::~Form() {
-	std::cout << "Destructor called for " << getName() << "." << std::endl;
+	std::cout << "Destructor called for " << name << "." << std::endl;
 }
 
 std::string Form::getName() const {
