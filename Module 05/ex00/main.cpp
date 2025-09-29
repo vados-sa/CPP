@@ -2,25 +2,32 @@
 
 int main()
 {
-	Bureaucrat b1("Donatelo", 42);
-	Bureaucrat b2("Leonardo", 151);
-	Bureaucrat b3("Raphael", 0);
-	Bureaucrat b4("Michelangelo", 42);
+	// too high
+	try {
+		Bureaucrat b("SpongeBob", 0);
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << '\n';
+	}
 
-	std::cout << b1;
-	std::cout << b2;
-	std::cout << b3;
-	std::cout << b4;
-	
-	b1.incrementGrade();
-	b2.decrementGrade();
-	b3.incrementGrade();
-	b4.decrementGrade();
+	// too low
+	try {
+		Bureaucrat b("Patrick", 151);
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << '\n';
+	}
 
-	std::cout << b1;
-	std::cout << b2;
-	std::cout << b3;
-	std::cout << b4;
+	// valid
+	try {
+		Bureaucrat b("Sindy", 1);
+		b.decrementGrade();
+		b.incrementGrade();
+		std::cout << b;
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << '\n';
+	}
 
 	return 0;
 }

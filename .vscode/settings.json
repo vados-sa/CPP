@@ -97,6 +97,11 @@
 		"execution": "cpp",
 		"ios": "cpp",
 		"locale": "cpp",
-		"__hash_table": "cpp"
+		"__hash_table": "cpp",
+		"__node_handle": "cpp",
+		"__split_buffer": "cpp",
+		"print": "cpp",
+		"queue": "cpp",
+		"stack": "cpp"
 	}
 }
