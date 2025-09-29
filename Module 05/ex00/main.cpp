@@ -9,6 +9,7 @@ int main()
 	catch (const std::exception& e) {
 		std::cout << e.what() << '\n';
 	}
+	std::cout << std::endl;
 
 	// too low
 	try {
@@ -17,11 +18,14 @@ int main()
 	catch (const std::exception& e) {
 		std::cout << e.what() << '\n';
 	}
+	std::cout << std::endl;
 
 	// valid
 	try {
 		Bureaucrat b("Sindy", 1);
+		std::cout << b;
 		b.decrementGrade();
+		std::cout << b;
 		b.incrementGrade();
 		std::cout << b;
 	}
