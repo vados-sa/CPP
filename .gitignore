@@ -1,0 +1,19 @@
+# C++ build files
+*.o
+*.out
+*.exe
+
+# VSCode
+.vscode/*
+
+
+# OS
+.DS_Store
+Thumbs.db
+
+webserv
+request
+
+#test files
+test_upload.txt
+.vscode/settings.json
