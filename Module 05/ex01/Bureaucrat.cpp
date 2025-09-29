@@ -36,11 +36,11 @@ Bureaucrat::~Bureaucrat() {
 
 
 const char* Bureaucrat::GradeTooHighException::what() const  throw() {
-	return "Grade too high error.\n Highest grade possible: 1.";
+	return "Grade too high error. Highest grade possible: 1.";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const  throw() {
-	return "Grade too low error.\n Lowest grade possible: 150." ;
+	return "Grade too low error. Lowest grade possible: 150." ;
 }
 
 std::string Bureaucrat::getName() const {
