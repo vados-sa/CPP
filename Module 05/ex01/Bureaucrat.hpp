@@ -7,7 +7,7 @@
 class Bureaucrat {
 	private:
 			std::string name;
-			int			grade; // 1 (highest) - 150 (lowest) 
+			int			grade;
 	public:
 			Bureaucrat();
 			Bureaucrat(std::string name, int grade);
