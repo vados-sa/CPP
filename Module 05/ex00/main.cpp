@@ -4,7 +4,7 @@ int main()
 {
 	// too high
 	try {
-		Bureaucrat b("SpongeBob", 0);
+		Bureaucrat b("Bureaucrat A", 0);
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << '\n';
@@ -13,7 +13,7 @@ int main()
 
 	// too low
 	try {
-		Bureaucrat b("Patrick", 151);
+		Bureaucrat b("Bureaucrat B", 151);
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << '\n';
@@ -22,7 +22,7 @@ int main()
 
 	// valid
 	try {
-		Bureaucrat b("Sindy", 1);
+		Bureaucrat b("Bureaucrat C", 1);
 		std::cout << b;
 		b.decrementGrade();
 		std::cout << b;

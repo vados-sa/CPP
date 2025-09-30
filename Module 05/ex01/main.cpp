@@ -21,14 +21,14 @@ int main()
 
     // Test sign with too low grade
     try {
-        Bureaucrat bob("SpongeBob", 70);
-        Form pineappleForm("Pineapple Form", 50, 100);
+        Bureaucrat b("Bureaucrat A", 70);
+        Form form("Form A", 50, 100);
 
-        std::cout << bob;
-        std::cout << pineappleForm;
+        std::cout << b;
+        std::cout << form;
 
-        bob.signForm(pineappleForm);
-        std::cout << "Is form signed: " << pineappleForm.getSignBool() << std::endl;
+        b.signForm(form);
+        std::cout << "Is form signed: " << form.getSignBool() << std::endl;
     } catch (std::exception &e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
@@ -36,14 +36,14 @@ int main()
 
 	// Test valid form creation and signing
     try {
-        Bureaucrat Patrick("Patrick", 42);
-        Form shellForm("Shell Form", 50, 100);
+        Bureaucrat b("Bureaucrat B", 42);
+        Form form("Form B", 50, 100);
 
-        std::cout << Patrick;
-        std::cout << shellForm;
+        std::cout << b;
+        std::cout << form;
 
-        Patrick.signForm(shellForm);
-        std::cout << "Is form signed: " << shellForm.getSignBool() << std::endl;
+        b.signForm(form);
+        std::cout << "Is form signed: " << form.getSignBool() << std::endl;
     } catch (std::exception &e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
