@@ -2,19 +2,22 @@
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
-    // without signing
+    // subject example
     try
     {
-        Bureaucrat b("Bureaucrat", 30);
-        ShrubberyCreationForm shrubberyForm(b.getName());
+        Intern someRandomIntern;
+        AForm* rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        if (!rrf) throw std::runtime_error("unknown form");
 
-        b.executeForm(shrubberyForm);
+        Bureaucrat b("Bureaucrat A", 1);
 
-        b.signForm(shrubberyForm);
-        b.executeForm(shrubberyForm);
+        b.signForm(*rrf);
+        b.executeForm(*rrf);
+        delete rrf;
     }
     catch(const std::exception& e)
     {
@@ -22,15 +25,17 @@ int main()
     }
     std::cout << std::endl;
 
-    // success
+    // shrubbery form
     try
     {
-        Bureaucrat b("Bureaucrat", 30);
-        RobotomyRequestForm robotomyForm(b.getName());
+        Intern someRandomIntern;
+        AForm* rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
 
-        b.signForm(robotomyForm);
-        b.executeForm(robotomyForm);
-        
+        Bureaucrat b("Bureaucrat B", 1);
+
+        b.signForm(*rrf);
+        b.executeForm(*rrf);
+        delete rrf;
     }
     catch(const std::exception& e)
     {
@@ -38,18 +43,37 @@ int main()
     }
     std::cout << std::endl;
 
-    // grade too low
+    // presidential pardon
     try
     {
-        Bureaucrat b("Bureaucrat", 30);
-        PresidentialPardonForm presidentialForm(b.getName());
+        Intern someRandomIntern;
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("PresidentialPardonForm", "Bender");
 
-        b.signForm(presidentialForm);
-        b.executeForm(presidentialForm);
+        Bureaucrat b("Bureaucrat A", 1);
 
-        b.setGrade(5);
-        b.signForm(presidentialForm);
-        b.executeForm(presidentialForm);
+        b.signForm(*rrf);
+        b.executeForm(*rrf);
+        delete rrf;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    std::cout << std::endl;
+
+   // unknown form
+    try
+    {
+        Intern someRandomIntern;
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("42 form", "Bender");
+
+        Bureaucrat b("Bureaucrat A", 1);
+
+        b.signForm(*rrf);
+        b.executeForm(*rrf);
+        delete rrf;
     }
     catch(const std::exception& e)
     {
