@@ -1,22 +1,24 @@
 #include "ShrubberyCreationForm.hpp"
+//#include "Bureaucrat.hpp"
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() {
-	std::cout << "Default Constructor called for ShrubberyCreationForm" << std::endl;
+	std::cout << "Default Constructor called for ShrubberyCreationForm." << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) 
-	: AForm(target, false, 145, 137) {
-	std::cout << "Constructor called for ShrubberyCreationForm" << std::endl;
+	: AForm("ShrubberyCreationForm", 145, 137), target(target) {
+	std::cout << "Constructor called for " << getName() << "." << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) 
-: AForm(other.getName(), other.getSign(), other.getGradeSign(), other.getGradeExec()) {
-	std::cout << "Copy Constructor called for ShrubberyCreationForm" << std::endl;
+: AForm(other.getName(), other.getGradeToSign(), other.getGradeToExec()) {
+	std::cout << "Copy Constructor called for " << getName() << "." << std::endl;
 	
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
-	std::cout << "Copy Assignment Operator called for ShrubberyCreationForm" << std::endl;
+	std::cout << "Copy Assignment Operator called for " << getName() << "." << std::endl;
 	if (this != &other)
 	{
 		AForm::operator=(other);
@@ -24,11 +26,16 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return *this;
 }
 
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
+	std::cout << "ShrubberyCreationForm Destructor called." << std::endl;
+}
+
 /* Creates a file <target>_shrubbery in the working directory and writes ASCII trees
 	inside it. */
 void ShrubberyCreationForm::action() const {
 	std::ofstream file;
-	file.open(this->getName() + "_shrubbery");
+	file.open(target + "_shrubbery");
 	file << "      /\\" << std::endl;
 	file << "     /**\\" << std::endl;
 	file << "    /****\\" << std::endl;
