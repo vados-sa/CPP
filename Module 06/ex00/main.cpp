@@ -1,24 +1,14 @@
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int ac, char *av[])
 {
-	std::cout << "Converting a number:" << std::endl;
-	ScalarConverter::convert("42.0f");
+    if (ac != 2) {
+        std::cerr << "Usage: ./ScalarConverter <string representation of a C++ literal>" << std::endl;
+        return 1;
+    }
 
-	std::cout << std::endl;
+    std::string str = av[1];
+    ScalarConverter::convert(str);
 
-	std::cout << "Converting a character:" << std::endl;
-	ScalarConverter::convert("A");
-
-	std::cout << std::endl;
-
-	std::cout << "Converting pseudo-literals f:" << std::endl;
-	ScalarConverter::convert("+inff");
-
-	std::cout << std::endl;
-
-	std::cout << "Converting pseudo-literals d:" << std::endl;
-	ScalarConverter::convert("+inf");
-	/* std::cout << "Converting a string:" << std::endl; // not sure if this should be handled
-	ScalarConverter::convert("hello"); */
+    return 0;
 }

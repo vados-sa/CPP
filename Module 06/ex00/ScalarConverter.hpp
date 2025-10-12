@@ -7,12 +7,12 @@
 
 class ScalarConverter {
 	private:
+	
+	public:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& other);
-
-	public:
 		ScalarConverter& operator = (const ScalarConverter& other);
-		~ScalarConverter(); // or make it virtual
+		virtual ~ScalarConverter();
 		
 		static void convert(std::string str);
 		
