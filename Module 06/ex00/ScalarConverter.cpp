@@ -1,4 +1,7 @@
 #include "ScalarConverter.hpp"
+#include <iostream>
+#include <sstream>
+#include <iomanip> 
 #include <limits>
 #include <climits>
 #include <cstdlib>
