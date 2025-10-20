@@ -102,7 +102,7 @@ void convertFromChar(std::string& s) {
 	char c = s[0];
 	
 	if (std::isprint(c)) std::cout << "char: " << c << std::endl;
-	else std::cout << "char: Non Displayable" << std::endl;
+	else std::cout << "char: Non displayable" << std::endl;
 	std::cout << "int: " << static_cast<int>(c) << std::endl;
 	std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
 	std::cout << "double: " << static_cast<double>(c) << ".0"  << std::endl;
@@ -120,10 +120,12 @@ void convertFromInt(std::string& s) {
 
 	if (valid) {
 		int n = static_cast<int>(v);
-		if (v >= 0 && v <= 127) {
+		int cmin = std::numeric_limits<char>::min();
+		int cmax = std::numeric_limits<char>::max();
+		if (n >= cmin && n <= cmax) {
 			char c = static_cast<char>(n);
 			if (std::isprint(c)) std::cout << "char: " << c << std::endl;
-			else std::cout << "char: Non Displayable" << std::endl; 
+			else std::cout << "char: Non displayable" << std::endl; 
 	
 		}
 		else
@@ -151,10 +153,12 @@ void convertFromFloat(std::string& s) {
 	
 	if (valid) {
 		float f = static_cast<float>(v);
-		if (f >= 0 && f <= 127) {
+		int cmin = std::numeric_limits<char>::min();
+		int cmax = std::numeric_limits<char>::max();
+		if (f >= cmin && f <= cmax) {
 			char c = static_cast<char>(f);
-			if (std::isprint(c)) std::cout << "char: " << c << std::endl;
-			else std::cout << "char: Non Displayable" << std::endl; 
+			if (std::isprint(static_cast<unsigned char>(c))) std::cout << "char: " << c << std::endl;
+			else std::cout << "char: Non displayable" << std::endl; 
 	
 		}
 		else
@@ -184,10 +188,12 @@ void convertFromDouble(std::string& s) {
 	if ((!endptr || *endptr != '\0') || (errno == ERANGE)) valid = false;
 	
 	if (valid) {
-		if (d >= 0 && d <= 127) {
+		int cmin = std::numeric_limits<char>::min();
+		int cmax = std::numeric_limits<char>::max();
+		if (d >= cmin && d <= cmax)  {
 			char c = static_cast<char>(d);
 			if (std::isprint(c)) std::cout << "char: " << c << std::endl;
-			else std::cout << "char: Non Displayable" << std::endl; 
+			else std::cout << "char: Non displayable" << std::endl; 
 	
 		}
 		else	std::cout << "char: impossible" << std::endl;
