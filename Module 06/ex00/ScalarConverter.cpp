@@ -31,14 +31,14 @@ ScalarConverter::~ScalarConverter()
 	std::cout << "Destructor" << std::endl;
 }
 
-bool isChar(std::string& s) {
+bool isChar(const std::string& s) {
 	if (s.empty()) return false;
 	
 	if (s.size() == 1 && !std::isdigit(static_cast<unsigned char>(s[0])))  return true;
 	else return false;
 }
 
-bool isInt(std::string& s) {
+bool isInt(const std::string& s) {
 	if (s.empty()) return false;
 	size_t i = 0;
 	if (s[i] == '+' || s[i] == '-') {
@@ -50,7 +50,7 @@ bool isInt(std::string& s) {
 	return true;
 }
 
-bool isFloat(std::string& s) {
+bool isFloat(const std::string& s) {
 	if (s.empty() || s.back() != 'f') return false;
 
 	std::string num = s.substr(0, s.size()-1);
@@ -74,7 +74,7 @@ bool isFloat(std::string& s) {
 	return hasDot;
 }
 
-bool isDouble(std::string& s) {
+bool isDouble(const std::string& s) {
 	if (s.empty()) return false;
 	
 	size_t i = 0;
@@ -95,13 +95,13 @@ bool isDouble(std::string& s) {
 	return hasDot;
 }
 
-bool isPseudoLit(std::string& s) {
+bool isPseudoLit(const std::string& s) {
     return (s == "nan" || s == "nanf" || 
             s == "+inf" || s == "-inf" || 
             s == "+inff" || s == "-inff");
 }
 
-void convertFromChar(std::string& s) {
+void convertFromChar(const std::string& s) {
 	char c = s[0];
 	
 	if (std::isprint(c)) std::cout << "char: " << c << std::endl;
@@ -111,7 +111,7 @@ void convertFromChar(std::string& s) {
 	std::cout << "double: " << static_cast<double>(c) << ".0"  << std::endl;
 }
 
-void convertFromInt(std::string& s) {
+void convertFromInt(const std::string& s) {
 	char* endptr = 0;
 	errno = 0;
 	bool valid = true;
@@ -141,7 +141,7 @@ void convertFromInt(std::string& s) {
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
 }
 
-void convertFromFloat(std::string& s) {
+void convertFromFloat(const std::string& s) {
 	char* endptr = 0;
 	errno = 0;
 	bool valid = true;
@@ -182,7 +182,7 @@ void convertFromFloat(std::string& s) {
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
 }
 
-void convertFromDouble(std::string& s) {
+void convertFromDouble(const std::string& s) {
 	char* endptr = 0;
 	errno = 0;
 	bool valid = true;
@@ -221,7 +221,7 @@ void convertFromDouble(std::string& s) {
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
 }
 
-void convertFromPseudoLit(std::string& s) {
+void convertFromPseudoLit(const std::string& s) {
 	std::string	pseudoLit[] = {"nan", "nanf", "+inf", "+inff", "-inf", "-inff"};
 
 	std::cout << "char: impossible\nint: impossible" << std::endl;
@@ -250,7 +250,7 @@ void convertFromPseudoLit(std::string& s) {
 	}
 }
 
-void ScalarConverter::convert(std::string str)
+void ScalarConverter::convert(const std::string& str)
 {
 	if (isChar(str)) convertFromChar(str);
 	
