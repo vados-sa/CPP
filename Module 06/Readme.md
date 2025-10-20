@@ -1,4 +1,5 @@
 **Type Cast**
+
 Convert an expression of a given type into another type.
 
 # Implicit Conversion:
@@ -23,14 +24,14 @@ This type of casting manipulates the constness of an object, either to be set or
 
 **obs: `typeid`** (not allowed in ex02): allows to check the type of an expression 'typeid (expression)'. This operator returns a reference to a constant object of type type_info that is defined in the standard header file <typeinfo>.
 
-### ex00
+# ex00
 `static_cast` chosen here because it performs standard numeric conversions and keeps intent explicit.
 Implicit conversion could also be used here, but it hides intent and makes narrowing conversions easy to miss. Explicit `static_cast` makes the potentially lossy step deliberate.  
 
-### ex01:
+# ex01:
 The exercise asks to round-trip a pointer through an integer type. `reinterpret_cast` is used here because the the conversion is being made between unrelated pointer types (uintptr_t and Data structure).
 
-**obs** Why would you want a class to be not instantiable?
+### Why would you want a class to be not instantiable?
 Provide only static utilities (no object needed) - one of.
 Use Cases of Static Member Functions:
 - They can access and modify static data members of the class.
@@ -40,7 +41,9 @@ Use Cases of Static Member Functions:
 Goal: round-trip a raw pointer through an integer without changing bits.
 reinterpret_cast: the only C++ cast that allows pointer ↔ integer conversions.
 
-### ex02:
+# ex02:
 `dynamic_cast` used here because it performs a safe downcast from Base to one of A, B, or C using RTTI (Run-Time Type Information). It checks the object’s dynamic type at runtime - Base must be polymorphic - and only succeeds if the object really is that derived type.
+
 For pointers: if the object isn’t of the requested derived type, dynamic_cast returns NULL. That’s why identify(Base*) checks each cast and prints the match.
+
 For references: if the cast fails, dynamic_cast throws std::bad_cast. That’s why identify(Base&) uses try/catch.
