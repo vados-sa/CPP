@@ -1,4 +1,24 @@
 #include "Serializer.hpp"
+#include <iostream>
+
+Serializer::Serializer() {
+    std::cout << "Serializer: default constructor" << std::endl;
+}
+
+Serializer::Serializer(const Serializer& other) {
+    (void)other;
+    std::cout << "Serializer: copy constructor" << std::endl;
+}
+
+Serializer& Serializer::operator=(const Serializer& other) {
+    (void)other;
+    std::cout << "Serializer: copy assignment operator" << std::endl;
+    return *this;
+}
+
+Serializer::~Serializer() {
+    std::cout << "Serializer: destructor" << std::endl;
+}
 
 // It takes a pointer and converts it to the unsigned integer type uintptr_t.
 uintptr_t Serializer::serialize(Data* ptr) {
