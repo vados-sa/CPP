@@ -4,5 +4,10 @@
 
 The format for declaring function templates with type parameters is:
 
-template <class identifier> function_declaration;
-template <typename identifier> function_declaration;
+`template <class identifier> function_declaration;`
+`template <typename identifier> function_declaration;`
+
+### Template Overloading
+Writing multiple versions of the same template that differ by const qualifiers or references.
+
+**[const correctness](https://isocpp.org/wiki/faq/const-correctness)**
