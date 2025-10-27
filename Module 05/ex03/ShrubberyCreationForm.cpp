@@ -35,7 +35,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	inside it. */
 void ShrubberyCreationForm::action() const {
 	std::ofstream file;
-	file.open(target + "_shrubbery");
+	file.open((target + "_shrubbery").c_str());
 	file << "      /\\" << std::endl;
 	file << "     /**\\" << std::endl;
 	file << "    /****\\" << std::endl;
