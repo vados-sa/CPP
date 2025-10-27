@@ -5,18 +5,17 @@
 
 class Bureaucrat {
 	private:
-			std::string name;
+			const std::string name;
 			int			grade; // 1 (highest) - 150 (lowest) 
 	public:
 			Bureaucrat();
-			Bureaucrat(std::string name, int grade);
+			Bureaucrat(const std::string& name, int grade);
 			Bureaucrat(const Bureaucrat& other);
 			Bureaucrat& operator = (const Bureaucrat& other);
 			~Bureaucrat();
 
-			std::string getName() const;
+			const std::string& getName() const;
 			int getGrade() const;
-			void setGrade(int g);
 			void incrementGrade();
 			void decrementGrade();
 

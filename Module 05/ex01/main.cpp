@@ -24,8 +24,8 @@ int main()
         Bureaucrat b("Bureaucrat A", 70);
         Form form("Form A", 50, 100);
 
-        std::cout << b;
-        std::cout << form;
+        std::cout << b << std::endl;
+        std::cout << form << std::endl;
 
         b.signForm(form);
         std::cout << "Is form signed: " << form.getSignBool() << std::endl;
@@ -39,8 +39,8 @@ int main()
         Bureaucrat b("Bureaucrat B", 42);
         Form form("Form B", 50, 100);
 
-        std::cout << b;
-        std::cout << form;
+        std::cout << b << std::endl;
+        std::cout << form << std::endl;
 
         b.signForm(form);
         std::cout << "Is form signed: " << form.getSignBool() << std::endl;

@@ -14,12 +14,12 @@ class Form {
 
 	public:
 		Form();
-		Form(std::string name, int gradeToSign, int gradeToExec);
+		Form(const std::string& name, int gradeToSign, int gradeToExec);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
 		~Form();
 		
-		std::string getName() const;
+		const std::string& getName() const;
 		bool getSignBool() const;
 		int getGradeToSign() const;
 		int getGradeToExec() const;

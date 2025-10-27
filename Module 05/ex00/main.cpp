@@ -23,11 +23,11 @@ int main()
 	// valid
 	try {
 		Bureaucrat b("Bureaucrat C", 1);
-		std::cout << b;
+		std::cout << b << std::endl;
 		b.decrementGrade();
-		std::cout << b;
+		std::cout << b << std::endl;
 		b.incrementGrade();
-		std::cout << b;
+		std::cout << b << std::endl;
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << '\n';

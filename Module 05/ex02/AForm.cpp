@@ -6,7 +6,7 @@ AForm::AForm()
 	std::cout << "Abstarct Default Constructor called." << std::endl;
 }
 
-AForm::AForm(std::string name, int gradeToSign, int gradeToExec)
+AForm::AForm(const std::string& name, int gradeToSign, int gradeToExec)
 	: name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExec(gradeToExec) {
 	std::cout << "Abstract Constructor called." << std::endl;
 
@@ -32,7 +32,7 @@ AForm::~AForm() {
 	std::cout << "Abstract Destructor called." << std::endl;
 }
 
-std::string AForm::getName() const {
+const std::string& AForm::getName() const {
 	return name;
 }
 
@@ -78,8 +78,7 @@ const char* AForm::FormNotSignedException::what() const throw() {
 std::ostream& operator<<(std::ostream& out, const AForm& obj) {
 	out << "Name: " << obj.getName() << std::endl << "Is it signed: " 
 	<< obj.getSignBool() << std::endl << "Grade to sign it: " << obj.getGradeToSign()
-	<< std::endl << "Grade to execute it: " << obj.getGradeToExec() << std::endl;
+	<< std::endl << "Grade to execute it: " << obj.getGradeToExec() << ".";
 
 	return out;
 }
-

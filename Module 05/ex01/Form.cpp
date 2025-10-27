@@ -6,7 +6,7 @@ Form::Form()
 	std::cout << "Default Constructor." << std::endl;
 }
 
-Form::Form(std::string name, int gradeToSign, int gradeToExec)
+Form::Form(const std::string& name, int gradeToSign, int gradeToExec)
 	: name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExec(gradeToExec) {
 	std::cout << "Constructor for " << name << "." << std::endl;
 
@@ -23,7 +23,6 @@ Form& Form::operator=(const Form& other) {
 	std::cout << "Copy Assigment Operator." << std::endl;
 	if (this != &other) {
 		this->isSigned = other.isSigned;
-		// name, gradeSign, and gradeExec are const and cannot be assigned
 	}
 	return *this;
 }
@@ -32,7 +31,7 @@ Form::~Form() {
 	std::cout << "Destructor called for " << name << "." << std::endl;
 }
 
-std::string Form::getName() const {
+const std::string& Form::getName() const {
 	return name;
 }
 
@@ -66,7 +65,7 @@ const char* Form::GradeTooLowException::what() const  throw()
 std::ostream& operator<<(std::ostream& out, const Form& obj) {
 	out << "Name: " << obj.getName() << std::endl << "Is it signed: " 
 	<< obj.getSignBool() << std::endl << "Grade to sign it: " << obj.getGradeToSign()
-	<< std::endl << "Grade to execute it: " << obj.getGradeToExec() << std::endl;
+	<< std::endl << "Grade to execute it: " << obj.getGradeToExec() << ".";
 
 	return out;
 }
