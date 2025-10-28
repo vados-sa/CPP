@@ -117,8 +117,8 @@ void convertFromInt(const std::string& s) {
 	bool valid = true;
 
 	long v = strtol(s.c_str(), &endptr, 10);
-	if ((!endptr || *endptr != '\0') || // X parsed the whole string
-		(errno == ERANGE) || // outside long's range
+	if ((!endptr || *endptr != '\0') ||
+		(errno == ERANGE) ||
 		(v < std::numeric_limits<int>::min() || v > std::numeric_limits<int>::max())) valid = false;
 
 	if (valid) {
@@ -150,8 +150,8 @@ void convertFromFloat(const std::string& s) {
     if (num.empty()) valid = false;
 
 	double v = strtod(num.c_str(), &endptr);
-	if ((!endptr || *endptr != '\0') || // didn't parsed the whole string
-		(errno == ERANGE) || // outside long's range
+	if ((!endptr || *endptr != '\0') ||
+		(errno == ERANGE) ||
 		(v < -std::numeric_limits<float>::max() || v > std::numeric_limits<float>::max())) valid = false;
 	
 	if (valid) {
