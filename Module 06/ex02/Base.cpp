@@ -10,10 +10,11 @@ Base::~Base() {}
 
  // It randomly instantiates A, B, or C and returns the instance as a Base pointer.
 Base* generate(void) {
-    switch (std::rand() % 3) {
+    switch (std::rand() % 4) {
         case 0: return new A();
         case 1: return new B();
-        default: return new C();
+        case 2: return new C();
+        default: return NULL;
     }
 }
 

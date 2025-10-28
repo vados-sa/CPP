@@ -19,10 +19,5 @@ int main() {
         std::cout << "----" << std::endl;
     }
 
-    // Null pointer test
-    Base* nullp = NULL;
-    std::cout << "identify(null Base*): ";
-    identify(nullp);
-
     return 0;
 }
