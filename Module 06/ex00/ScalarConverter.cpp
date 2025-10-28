@@ -134,8 +134,8 @@ void convertFromInt(const std::string& s) {
 		else
 			std::cout << "char: impossible" << std::endl;
 		std::cout << "int: " << n << std::endl;
-		std::cout << "float: " << static_cast<float>(n) << ".0f" << std::endl;
-		std::cout << "double: " << static_cast<double>(n) << ".0"  << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(n) << "f" << std::endl;
+		std::cout << "double: " << static_cast<double>(n) << std::endl;
 	}
 	else
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
@@ -171,12 +171,10 @@ void convertFromFloat(const std::string& s) {
 			std::cout << "int: impossible" << std::endl;
 		else	std::cout << "int: " << static_cast<int>(f) << std::endl;
 
-		if (std::floor(f) == f)	std::cout << "float: " << f << ".0f" << std::endl;
-		else	std::cout << "float: " << f << "f" << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 
 		double d = static_cast<double>(f);
-		if (std::floor(d) == d) std::cout << "double: " << d << ".0" << std::endl;
-		else std::cout << "double: " << d << std::endl;
+		std::cout << "double: " << d << std::endl;
 	}
 	else
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
@@ -209,13 +207,9 @@ void convertFromDouble(const std::string& s) {
 			std::cout << "float: impossible" << std::endl;
 		else {
 			float f = static_cast<float>(d);
-			if (std::floor(f) == f)
-			    std::cout << "float: " << f << ".0f" << std::endl;
-			else
-			    std::cout << "float: " << f << "f" << std::endl;
+			    std::cout << "float: " << std::fixed << std::setprecision(1)   << f << "f" << std::endl;
 		}
-		if (std::floor(d) == d) std::cout << "double: " << d << ".0"  << std::endl;
-		else std::cout << "double: " << d  << std::endl;
+		std::cout << "double: "<< d  << std::endl;
 	}
 	else
 		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
@@ -264,9 +258,6 @@ void ScalarConverter::convert(const std::string& str)
 		convertFromPseudoLit(str);
 	}
 	else
-		std::cout << "char: impossible\n\
-					  int: impossible\n\
-					  float: impossible\n\
-					  double: impossible" << std::endl;
+		std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible" << std::endl;
 }
 
