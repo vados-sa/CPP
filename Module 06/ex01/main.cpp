@@ -15,25 +15,25 @@ int main() {
     uintptr_t raw = Serializer::serialize(&obj);
     Data* new_obj = Serializer::deserialize(raw);
 
-    std::cout << "\nDeserialized pointer:\n"
+    std::cout << "\nNew Object:\n"
               << "  address: " << new_obj << "\n"
               << "  id: " << new_obj->id << "\n"
               << "  name: " << new_obj->name << std::endl;
 
     std::cout << std::boolalpha
-              << "\nSame pointer: " << (new_obj == &obj) << std::endl;
+              << "\nAre they the same pointer pointer: " << (new_obj == &obj) << std::endl << std::endl;
 
-    // Alias test
+    // alias test
     obj.id = 99;
-    std::cout << "Alias check - should be 99: " << new_obj->id << std::endl;
+    std::cout << "Alias check: " << new_obj->id << std::endl;
 
-    // Heap test
+    // heap test
     Data* heap = new Data;
     heap->id = 7;
     heap->name = "heap";
     uintptr_t raw2 = Serializer::serialize(heap);
     Data* back2 = Serializer::deserialize(raw2);
-    std::cout << "\nHeap round-trip same pointer: " << (back2 == heap) << std::endl;
+    std::cout << "\nHeap round-trip same pointer: " << (back2 == heap) << std::endl << std::endl;
     delete heap;
 
     // NULL test
