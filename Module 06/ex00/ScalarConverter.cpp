@@ -51,7 +51,7 @@ bool isInt(const std::string& s) {
 }
 
 bool isFloat(const std::string& s) {
-	if (s.empty() || s.back() != 'f') return false;
+	if (s.empty() || s[s.size() - 1] != 'f') return false;
 
 	std::string num = s.substr(0, s.size()-1);
     if (num.empty()) return false;
