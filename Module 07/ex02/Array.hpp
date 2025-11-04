@@ -9,7 +9,7 @@ class Array {
 		unsigned int _size;
 	public:
 		Array() : _size(0) {
-			elements = nullptr;
+			elements = NULL;
 		}
 
 		Array(unsigned int n) : _size(n) {
@@ -26,10 +26,9 @@ class Array {
 			if (this == &other) return *this;
 			else {
 				delete[] elements;
+				elements = NULL;
 				_size = other._size;
-				if (_size == 0)
-					elements = NULL;
-				else {
+				if (_size) {
 					elements = new T[_size];
 					for (unsigned int i = 0; i < _size; ++i)
         				elements[i] = other.elements[i];
@@ -42,12 +41,12 @@ class Array {
 
 		T& operator[](unsigned int index) {
 			if (index >= _size)
-				throw std::out_of_range("Array index out of range");
+				throw std::out_of_range("Array index out of bounds");
 			return elements[index];
 		}
 		const T& operator[](unsigned int index) const {
 			if (index >= _size)
-				throw std::out_of_range("Array index out of range");
+				throw std::out_of_range("Array index out of bounds");
 			return elements[index];
 		}
 
