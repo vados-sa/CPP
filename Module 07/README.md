@@ -24,3 +24,18 @@ That`s why
 `int* a = new int();`
 `std::cout << *a;`
 prints `0`.
+
+
+### Notes for evaluation:
+**ex00:** 
+- introduction to Function Template. 
+- the goal is to write 3 function templates, swap, min and max. 
+- Subject provides a main for testing
+- I added a test case where the types are the same
+
+**ex01:**
+- it's about providing two overloads for `iter()` so constness is also respected.
+- const array can only be displayed, but not incremented.
+
+**ex02**
+- introduction to Class Template.
