@@ -22,7 +22,8 @@ int main()
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 	
 	std::cout << std::endl;
-	// tie case
+
+	// tie case - should all output "yes"
     int e = 42, f = 42;
     std::cout << "tie min picks second? " << ( &::min(e, f) == &f ? "yes" : "no" ) << std::endl;
     std::cout << "tie max picks second? " << ( &::max(e, f) == &f ? "yes" : "no" ) << std::endl;
