@@ -12,7 +12,7 @@ int main (int ac, char *av[]) {
 		// maybe use a try and catch
 		btc.loadDB();
 		//btc.printDB();
-		//btc.processInputFile();
+		btc.processInputFile();
 	} catch (const std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
 		return 1;

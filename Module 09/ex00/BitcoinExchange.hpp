@@ -14,5 +14,5 @@ class BitcoinExchange {
 
 		void loadDB();
 		//void printDB() const;
-		//void processInputFile();
+		void processInputFile();
 };
