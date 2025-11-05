@@ -7,11 +7,16 @@ int main (int ac, char *av[]) {
 		return 1;
 	}
 	
-	BitcoinExchange btc(av[1]);
-	// maybe use a try and catch
-	btc.loadDB();
-	//btc.printDB();
-	//btc.processInputFile();
+	try {
+		BitcoinExchange btc(av[1]);
+		// maybe use a try and catch
+		btc.loadDB();
+		//btc.printDB();
+		//btc.processInputFile();
+	} catch (const std::exception& e) {
+		std::cerr << "Error: " << e.what() << '\n';
+		return 1;
+	}
 	
 	return 0;
 }

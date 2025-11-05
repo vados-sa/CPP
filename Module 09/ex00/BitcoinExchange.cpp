@@ -51,9 +51,7 @@ void BitcoinExchange::loadDB() {
 			db_info[date] = value;
 		}
 	}
-	else {
-		std::cout << "Error: could not open file." << std::endl;
-	}
+	else throw std::runtime_error("data.csv could not open");
 }
 
 /* void BitcoinExchange::printDB() const {
