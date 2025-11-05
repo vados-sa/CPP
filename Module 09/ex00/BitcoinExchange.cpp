@@ -24,7 +24,6 @@ void BitcoinExchange::loadDB() {
 	std::string line;
 
 	if (db_file.is_open()) {
-		// discard header line
 		std::string header; 
 		std::getline(db_file, header);
 
@@ -36,7 +35,7 @@ void BitcoinExchange::loadDB() {
 			std::size_t pos = line.find(',');
 			if (pos == std::string::npos) {
 				std::cout << "Invalid line: " << line << std::endl;
-				continue;
+				continue ;
 			}
 
 			std::string date = line.substr(0, pos);
@@ -47,9 +46,8 @@ void BitcoinExchange::loadDB() {
 			vs >> value;
 			if (!vs) {
 				std::cout << "Invalid number: " << valueStr << std::endl;
-				continue;
+				continue ;
 			}
-
 			db_info[date] = value;
 		}
 	}
