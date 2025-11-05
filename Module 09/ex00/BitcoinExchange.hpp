@@ -15,4 +15,5 @@ class BitcoinExchange {
 		void loadDB();
 		//void printDB() const;
 		void processInputFile();
+		double findExchangeRate(const std::string& date) const;
 };

@@ -64,14 +64,8 @@ static std::string validadeDate(std::string line, std::size_t pos) {
 	char c1, c2;
 	if (!(in >> y >> c1 >> m >> c2 >> d) || c1 != '-' || c2 != '-' || in.peek() != EOF) 
 		badInput = true;
-	
-	//std::cout << y << " " << m << " " << d << std::endl;
 
-	time_t now = std::time(NULL);
-	std::tm* lt = std::localtime(&now);
-	int currentYear = lt->tm_year + 1900;
-
-	if (y < 1900 || y > currentYear)
+	if (y < 1900)
 		badInput = true;
 	
 	if (m < 1 || m > 12)
@@ -103,6 +97,8 @@ static double validadeExchangeRate(std::string line, std::size_t pos) {
 	std::istringstream vs(valueStr);
 	double value = 0.0;
 	vs >> value;
+	vs >> std::ws;
+	if (!vs.eof()) return -1;
 	if (!vs) {
 		std::cout << "Error: bad input => " << line << std::endl;
 		return -1;
@@ -143,11 +139,30 @@ void BitcoinExchange::processInputFile() {
 			if (value == -1)
 				continue ;
 
-			// lookup exchange rate
-			// compute and print
+			double rate = findExchangeRate(date);
+			if (rate == -1) {
+				std::cout << "Error: no rate for date => " << date << std::endl; 
+				continue ;
+			}
+			
+			std::cout << date << " => " << value << " = " << value * rate << std::endl;
 		}
 	}
 	else throw std::runtime_error("input file could not open");
+}
+
+double BitcoinExchange::findExchangeRate(const std::string& date) const {
+	if (db_info.empty())
+		return -1;
+	std::map<std::string,double>::const_iterator it = db_info.lower_bound(date);
+	if (it == db_info.end() or it->first != date) {
+		if (it == db_info.begin())
+			return -1;
+		else
+			--it;
+	}
+
+	return it->second;
 }
 
 /* void BitcoinExchange::printDB() const {
