@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <sstream>
 #include <ctime>
+#include <cctype>
+#include <cstdlib>
 
 BitcoinExchange::BitcoinExchange(const std::string& input_file) : file(input_file) {}
 
@@ -42,10 +44,14 @@ void BitcoinExchange::loadDB() {
 			std::string date = line.substr(0, pos);
 			std::string valueStr = line.substr(pos + 1);
 	
-			std::istringstream vs(valueStr);
-			double value = 0.0;
-			vs >> value;
-			if (!vs) {
+			char* end = 0;
+			double value = std::strtod(valueStr.c_str(), &end);
+			if (end == valueStr.c_str()) {
+				std::cout << "Invalid number: " << valueStr << std::endl;
+				continue ;
+			}
+			while (*end && std::isspace(static_cast<unsigned char>(*end))) ++end;
+			if (*end != '\0') {
 				std::cout << "Invalid number: " << valueStr << std::endl;
 				continue ;
 			}
@@ -94,12 +100,15 @@ static std::string validadeDate(std::string line, std::size_t pos) {
 
 static double validadeExchangeRate(std::string line, std::size_t pos) {
 	std::string valueStr = line.substr(pos + 3);
-	std::istringstream vs(valueStr);
-	double value = 0.0;
-	vs >> value;
-	vs >> std::ws;
-	if (!vs.eof()) return -1;
-	if (!vs) {
+
+	char* end = 0;
+	double value = std::strtod(valueStr.c_str(), &end);
+	if (end == valueStr.c_str()) {
+		std::cout << "Error: bad input => " << line << std::endl;
+		return -1;
+	}
+	while (*end && std::isspace(static_cast<unsigned char>(*end))) ++end;
+	if (*end != '\0') {
 		std::cout << "Error: bad input => " << line << std::endl;
 		return -1;
 	}
@@ -124,6 +133,8 @@ void BitcoinExchange::processInputFile() {
 
 		while (std::getline(input_file, line)) {
 			if (line.empty()) continue ;
+			if (!line.empty() && line[line.size() - 1] == '\r')
+				line.erase(line.size() - 1);
 
 			std::size_t pos = line.find(" | ");
 			if (pos == std::string::npos) {
@@ -145,7 +156,12 @@ void BitcoinExchange::processInputFile() {
 				continue ;
 			}
 			
-			std::cout << date << " => " << value << " = " << value * rate << std::endl;
+			std::ios::fmtflags oldf = std::cout.flags();
+			std::streamsize oldp = std::cout.precision();
+			std::cout << date << " => " << value << " = " 
+			<< std::fixed << std::setprecision(2) << (value * rate) << std::endl;
+			std::cout.flags(oldf);
+			std::cout.precision(oldp);
 		}
 	}
 	else throw std::runtime_error("input file could not open");
