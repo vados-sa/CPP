@@ -1,6 +1,8 @@
 #pragma once
+#include <stack>
 
 class RPN {
+	std::stack<int> st;
 
 	public:
 		RPN();
@@ -8,5 +10,5 @@ class RPN {
 		RPN& operator=(const RPN& other);
 		~RPN();
 
-		
+		void rpnCalculator(std::string& expression);
 };
