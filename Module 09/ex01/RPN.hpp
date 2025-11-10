@@ -2,7 +2,7 @@
 #include <stack>
 
 class RPN {
-	std::stack<int> st;
+	std::stack<double> st;
 
 	public:
 		RPN();
@@ -10,5 +10,5 @@ class RPN {
 		RPN& operator=(const RPN& other);
 		~RPN();
 
-		void rpnCalculator(std::string& expression);
+		void rpnCalculator(const std::string& expression);
 };
