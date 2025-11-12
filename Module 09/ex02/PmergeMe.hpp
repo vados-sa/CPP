@@ -8,8 +8,8 @@
 // implement your algorithm for each container
 
 class PmergeMe {
-	std::vector<int> containerOne;
-	std::deque<int> containerTwo;
+	std::vector<int> _vector;
+	std::deque<int> _deque;
 
 	public:
 		PmergeMe();
@@ -18,4 +18,6 @@ class PmergeMe {
 		~PmergeMe();
 
 		void parseList(char *av[]);
+		void fj_sort_vector(std::vector<int>&);
+		//void fj_sort_deque(std::deque<int>&);
 };
