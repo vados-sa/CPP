@@ -47,6 +47,6 @@ int Span::longestSpan() const {
 	return highest - lowest;
 }
 
-int Span::getN() const {
+unsigned int Span::getN() const {
 	return N;
 }

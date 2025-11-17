@@ -27,5 +27,5 @@ class Span {
 			span.insert(span.end(), first, last);
 		}
 
-		int getN() const;
+		unsigned int getN() const;
 };
