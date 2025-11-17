@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <ctype.h>
+#include <sstream>
 
 PmergeMe::PmergeMe() {}
 
@@ -18,16 +19,22 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 PmergeMe::~PmergeMe() {}
 
 void PmergeMe::parseList(char *av[]) {
-	
 	for (int i = 1; av[i]; i++) {
-		for (int j = 0; av[i][j]; j++) {
-			if (!isdigit(av[i][j]) || av[i][j] == '0') // should I take care of '+'?
-				throw std::runtime_error(std::string("Not a positive integer"));
+		const char *s = av[i];
+		if (*s == '+') ++s;
+		if (!*s) throw std::runtime_error("Not a positive integer");
+
+		if (*s == '0' && s[1] == '\0')
+			throw std::runtime_error("Not a positive integer");
+		
+		for (const char *p = s; *p; ++p) {
+			if (!isdigit(static_cast<unsigned char>(*p)))
+				throw std::runtime_error("Not a positive integer");
 		}
 
-		float n = atol(av[i]);
+		unsigned long n = std::strtoul(av[i], 0, 10);
 		if (n > INT32_MAX)
-			throw std::runtime_error(std::string("Integer overflow"));
+			throw std::runtime_error("Integer overflow");
 		
 		_vector.push_back(static_cast<int>(n));
 		_deque.push_back(static_cast<int>(n));
@@ -44,3 +51,16 @@ void PmergeMe::parseList(char *av[]) {
 		std::cout << " [...]";
 	std::cout << std::endl;
 }
+
+void PmergeMe::fj_sort_vector() {
+
+/* 	std::cout << _vector.size() << std::endl;
+	for (size_t i = 0; i < _vector.size(); i++) {
+		std::cout << _vector.at(i) << " ";
+	}
+	std::cout << std::endl; */
+}
+
+/* void PmergeMe::fj_sort_deque() {
+
+} */
