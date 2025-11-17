@@ -65,3 +65,9 @@ Perform operations through iterators, not directly on containers.
 
 # std::stack
 Stacks are a type of container adaptor, specifically designed to operate in a LIFO context (last-in first-out), where elements are inserted and extracted only from one end of the container.
+
+It’s a thin wrapper over another container (by default `std::deque<T>`).
+
+Internally it stores the underlying container in a protected member called `c`.
+
+The STL designers hide iterators because **the whole point of a stack is that you cannot walk through it**.
