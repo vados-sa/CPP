@@ -23,8 +23,8 @@ void RPN::rpnCalculator(const std::string& expression) {
 
 	for (size_t i = 0; i < expression.size(); i++) {
 		if (std::isspace(expression[i])) continue ;
-		else if (isdigit(expression[i])) {
-			if (i+1 < expression.size() && std::isdigit(expression[i + 1]))
+		else if (isdigit(static_cast<unsigned char>(expression[i]))) {
+			if (i+1 < expression.size() && std::isdigit(static_cast<unsigned char>(expression[i + 1])))
 				throw std::runtime_error(std::string("Only single-digit operands allowed"));
 			else if (i+1 < expression.size() && !std::isspace(expression[i + 1]))
 				throw std::runtime_error(std::string("Missing space after operand"));
