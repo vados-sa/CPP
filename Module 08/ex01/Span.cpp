@@ -4,6 +4,8 @@
 #include <limits>
 #include <iterator>
 
+Span::Span() : N(0) {}
+
 Span::Span(unsigned int N) : N(N) { span.reserve(N); }
 
 Span::Span(const Span& other)

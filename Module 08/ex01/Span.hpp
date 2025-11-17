@@ -8,7 +8,8 @@ class Span {
 		unsigned int N;
 
 	public:
-		explicit Span(unsigned int N);
+		Span();
+		Span(unsigned int N);
 		Span(const Span& other);
 		Span& operator=(const Span& other);
 		~Span();
