@@ -28,14 +28,6 @@ void Span::addNumber(int n) {
 		span.push_back(n);
 }
 
-template <typename It>
-void Span::addRange(It first, It last) {
-	int incoming = std::distance(first, last);
-	if (span.size() + static_cast<size_t>(incoming) > static_cast<size_t>(N))
-		throw std::length_error("Not enough space in Span");
-	span.insert(span.end(), first, last);
-}
-
 int Span::shortestSpan() const {
 	if (span.size() < 2)
 		throw std::logic_error("Not enough elements to compute span");
@@ -53,4 +45,8 @@ int Span::longestSpan() const {
 	int highest = *std::max_element(span.begin(), span.end());
 	int lowest = *std::min_element(span.begin(), span.end());
 	return highest - lowest;
+}
+
+int Span::getN() const {
+	return N;
 }
