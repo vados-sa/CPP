@@ -40,7 +40,7 @@ void test_big_addRange() {
 		range.push_back(i);
 	
 	Span sp = Span(1000);
-	sp.addNumbersRange(range.begin(), range.end());
+	sp.addRange(range.begin(), range.end());
 
 	std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
 	std::cout << "Longest span: " << sp.longestSpan() << std::endl;
