@@ -18,6 +18,6 @@ class PmergeMe {
 		~PmergeMe();
 
 		void parseList(char *av[]);
-		void fj_sort_vector(std::vector<int>&);
-		//void fj_sort_deque(std::deque<int>&);
+		void fj_sort_vector();
+		//void fj_sort_deque();
 };
