@@ -40,7 +40,6 @@ int main()
 	std::cout << std::endl;
 
 	{
-		// test with another container
 		std::cout << "---- std::list ----" << std::endl;
 		std::list<int> liststack;
 
@@ -56,7 +55,6 @@ int main()
 		liststack.push_back(3);
 		liststack.push_back(5);
 		liststack.push_back(737);
-		//[...]
 		liststack.push_back(0);
 
 		std::list<int>::iterator listit = liststack.begin();
