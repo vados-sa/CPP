@@ -21,7 +21,7 @@ void test_big_sequential() {
 
 	Span sp = Span(10002);
 	
-	for (int i = 0; i < sp.getN(); i++)
+	for (unsigned int i = 0; i < sp.getN(); i++)
 		sp.addNumber(i);
 		
 	std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
