@@ -7,7 +7,7 @@
 
 class PmergeMe {
 	std::vector<int> _vector;
-	void step1_pair_sort(std::vector<int>& seq, std::size_t elemSize);
+	void fordJohnson(std::vector<int>& seq, std::size_t elemSize);
 	long vector_comp_count;
 
 	std::deque<int> _deque;
