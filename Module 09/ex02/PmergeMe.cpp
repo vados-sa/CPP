@@ -3,11 +3,13 @@
 #include <ctype.h>
 #include <sstream>
 #include <algorithm>
+#include <cmath>
 
-PmergeMe::PmergeMe() {}
+PmergeMe::PmergeMe() : vector_comp_count(0), deque_comp_count(0) {}
 
 PmergeMe::PmergeMe(const PmergeMe& other) 
-:_vector(other._vector), _deque(other._deque) {}
+:_vector(other._vector), vector_comp_count(other.vector_comp_count),
+_deque(other._deque), deque_comp_count(other.deque_comp_count) {}
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 	if (this != &other){
@@ -70,6 +72,7 @@ void PmergeMe::step1_pair_sort(std::vector<int>& seq, std::size_t elemSize) {
 
 	for (std::size_t i = elemSize - 1; i + elemSize < n; i += elemSize * 2) {
 		if (seq[i] > seq[i + elemSize]) {
+			vector_comp_count++;
 			std::size_t left_first = i - (elemSize - 1);
 			std::size_t right_first = left_first + elemSize;
 			std::swap_ranges(seq.begin() + left_first,
@@ -84,4 +87,23 @@ void PmergeMe::step1_pair_sort(std::vector<int>& seq, std::size_t elemSize) {
 void PmergeMe::SortVector() {
 	step1_pair_sort(_vector, 1);
 	printVector(_vector);
+}
+
+static size_t F(size_t n) {
+	size_t sum = 0;
+
+	for (size_t k = 1; k <= n; k++) {
+		double value = (3.0/4.0) * k;
+		sum += static_cast<size_t>(ceil(log2(value)));
+	}
+	return sum;
+}
+
+void PmergeMe::compCountCheck() {
+	size_t n = _vector.size();
+	size_t max_allowed = F(n);
+
+	std::cout << "Maximum Comparisions allowed: F(" << n << ") = " << max_allowed << std::endl;
+	std::cout << "(Vector) Total Comparisions = " << vector_comp_count << std::endl;
+	//std::cout << "(Deqque) Total Comparisions = " << deque_comp_count << std::endl;
 }

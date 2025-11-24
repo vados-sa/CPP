@@ -24,6 +24,7 @@ int main(int ac, char *av[]) {
 		obj.parseList(av);
 		obj.SortVector();
 		//obj.SortDeque();
+		obj.compCountCheck();
 	}
 	catch(const std::exception& e)
 	{

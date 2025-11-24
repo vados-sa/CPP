@@ -8,8 +8,10 @@
 class PmergeMe {
 	std::vector<int> _vector;
 	void step1_pair_sort(std::vector<int>& seq, std::size_t elemSize);
+	long vector_comp_count;
 
 	std::deque<int> _deque;
+	long deque_comp_count;
 
 	public:
 		PmergeMe();
@@ -21,6 +23,7 @@ class PmergeMe {
 
 		void SortVector();
 		//size_t get_vector_size() const;
+		void compCountCheck();
 
 		//void SortDeque();
 };
