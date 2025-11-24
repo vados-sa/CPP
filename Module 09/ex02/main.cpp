@@ -22,8 +22,8 @@ int main(int ac, char *av[]) {
 	{
 		PmergeMe obj;
 		obj.parseList(av);
-		obj.fj_sort_vector();
-		//obj.fj_sort_deque();
+		obj.SortVector();
+		//obj.SortDeque();
 	}
 	catch(const std::exception& e)
 	{
