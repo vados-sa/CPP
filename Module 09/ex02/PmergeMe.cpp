@@ -86,6 +86,58 @@ static int repOfElem(const std::vector<int>& seq, std::size_t elemSize, std::siz
     return seq[last];
 }
 
+
+static std::vector<std::size_t> buildJacobsthalOrder(const std::vector<std::size_t>& pendElems) {
+	std::vector<std::size_t> order;
+	order.reserve(pendElems.size());
+
+	const std::size_t P = pendElems.size(); // number of b-elements in pend
+
+    if (P == 0)
+        return order;
+
+	std::size_t lastJac = 1;   // previous Jacobsthal "label" boundary (J2)
+    std::size_t J_prev  = 1;   // J2
+    std::size_t J_curr  = 3;   // J3
+
+	const std::size_t Lmax = P + 1;
+
+	// 1) Jacobsthal-driven segments
+    while (J_curr <= Lmax) {
+        // Insert labels in (lastJac, J_curr], in reverse
+        std::size_t label = J_curr;
+        while (label > lastJac) {
+            if (label >= 2) {
+                std::size_t pos = label - 2; // 0-based position in pendElems
+                if (pos < P) {
+                    order.push_back(pendElems[pos]); // push *element index*
+                }
+            }
+            --label;
+        }
+
+        lastJac = J_curr;
+
+        // Next Jacobsthal: J_next = J_curr + 2 * J_prev
+        std::size_t J_next = J_curr + 2 * J_prev;
+        J_prev = J_curr;
+        J_curr = J_next;
+    }
+
+    // 2) Remaining labels (if any), inserted in reverse order
+    std::size_t label = Lmax;
+    while (label > lastJac) {
+        if (label >= 2) {
+            std::size_t pos = label - 2; // 0-based index in pendElems
+            if (pos < P) {
+                order.push_back(pendElems[pos]);
+            }
+        }
+        --label;
+    }
+	return order;
+}
+
 void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 	// Step 1
 	const std::size_t n = seq.size();
@@ -139,9 +191,11 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 	std::cout << "Pend: ";
 	printVector(flattenElems(seq, elemSize, pendElems)); */
 
-	// Step 3: insert pend into main (using Jacobsthal order - last)
-	for (std::size_t i = 0; i < pendElems.size(); i++) {
-		std::size_t bIdx = pendElems[i];
+	// Step 3: insert pend into main using Jacobsthal order
+	std::vector<std::size_t> order = buildJacobsthalOrder(pendElems);
+
+	for (std::size_t i = 0; i < order.size(); i++) { // jacobsthal sequence goes in here.
+		std::size_t bIdx = order[i];
 		int bRep = repOfElem(seq, elemSize, bIdx);
 
 		bool isOddElement = false;
