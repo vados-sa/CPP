@@ -56,11 +56,28 @@ void PmergeMe::parseList(char *av[]) {
 }
 
 // turn this into a template function to print like the subject.
-static void printVector(std::vector<int>& v) {
+static void printVector(const std::vector<int>& v) {
 	for (std::size_t i = 0; i < v.size(); i++) {
 		std::cout << v[i] << " ";
 	}
 	std::cout << std::endl;
+}
+
+static std::vector<int> flattenElems(const std::vector<int>& seq,
+                              std::size_t elemSize,
+                              const std::vector<std::size_t>& elems)
+{
+    std::vector<int> out;
+    for (std::vector<std::size_t>::const_iterator it = elems.begin();
+     it != elems.end();
+     ++it)
+	{
+	    std::size_t e = *it;
+	    std::size_t start = e * elemSize;
+	    std::size_t end   = start + elemSize;
+	    out.insert(out.end(), seq.begin() + start, seq.begin() + end);
+	}
+    return out;
 }
 
 void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
@@ -85,52 +102,44 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 
 	// Step 2: build chains (main + pend)
 
-	std::vector<int> main;
-	std::vector<int> pend;
-
 	const std::size_t numElements = n / elemSize;
 	const std::size_t numPairs    = numElements / 2;
 	const bool   hasOdd      = (numElements % 2 != 0);
 
 	// MAIN: b1 + all a's
+	std::vector<std::size_t> mainElems;
 	if (numPairs > 0) {
-		// b1 = element 0
-		std::size_t b1_start = 0;
-		std::size_t b1_end   = elemSize;
-		main.insert(main.end(), seq.begin() + b1_start, seq.begin() + b1_end);
+		mainElems.push_back(0); // b1 = element 0
 
 		// all a's: element indices 1, 3, 5, ..., 2*numPairs - 1
 		for (std::size_t p = 0; p < numPairs; ++p) {
 			std::size_t a_idx  = 2 * p + 1;
-			std::size_t start  = a_idx * elemSize;
-			std::size_t end    = start + elemSize;
-			main.insert(main.end(), seq.begin() + start, seq.begin() + end);
+			mainElems.push_back(a_idx);
 		}
 	}
 
 	// PEND: b2..b_numPairs
+	std::vector<std::size_t> pendElems;
 	for (std::size_t p = 1; p < numPairs; ++p) { // start at b2
 		std::size_t b_idx = 2 * p;
-		std::size_t start = b_idx * elemSize;
-		std::size_t end   = start + elemSize;
-		pend.insert(pend.end(), seq.begin() + start, seq.begin() + end);
+		pendElems.push_back(b_idx);
 	}
 
 	// plus odd element as full element in pend
 	if (hasOdd) {
 		std::size_t odd_idx = 2 * numPairs;
-		std::size_t start   = odd_idx * elemSize;
-		std::size_t end     = start + elemSize;
-		pend.insert(pend.end(), seq.begin() + start, seq.begin() + end);
+		pendElems.push_back(odd_idx);
 	}
 
 
 	std::cout << "Level elemSize=" << elemSize << "\nMain: ";
-	printVector(main);
+	printVector(flattenElems(seq, elemSize, mainElems));
 	std::cout << "Pend: ";
-	printVector(pend);
+	printVector(flattenElems(seq, elemSize, pendElems));
 
 	// Step 3: insert pend into main using Jacobsthal order
+
+
 }
 
 void PmergeMe::SortVector() {
