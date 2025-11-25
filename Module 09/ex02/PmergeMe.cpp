@@ -63,14 +63,14 @@ static void printVector(const std::vector<int>& v) {
 	std::cout << std::endl;
 }
 
-static std::vector<int> flattenElems(const std::vector<int>& seq,
+/* static std::vector<int> flattenElems(const std::vector<int>& seq,
                               std::size_t elemSize,
                               const std::vector<std::size_t>& elems)
 {
     std::vector<int> out;
-    for (std::vector<std::size_t>::const_iterator it = elems.begin();
-     it != elems.end();
-     ++it)
+	out.reserve(elems.size() * elemSize);
+
+    for (std::vector<std::size_t>::const_iterator it = elems.begin(); it != elems.end(); ++it)
 	{
 	    std::size_t e = *it;
 	    std::size_t start = e * elemSize;
@@ -78,6 +78,12 @@ static std::vector<int> flattenElems(const std::vector<int>& seq,
 	    out.insert(out.end(), seq.begin() + start, seq.begin() + end);
 	}
     return out;
+} */
+
+static int repOfElem(const std::vector<int>& seq, std::size_t elemSize, std::size_t elemIndex)
+{
+    std::size_t last = elemIndex * elemSize + (elemSize - 1);
+    return seq[last];
 }
 
 void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
@@ -106,43 +112,96 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 	const std::size_t numPairs    = numElements / 2;
 	const bool   hasOdd      = (numElements % 2 != 0);
 
-	// MAIN: b1 + all a's
 	std::vector<std::size_t> mainElems;
 	if (numPairs > 0) {
-		mainElems.push_back(0); // b1 = element 0
+		mainElems.push_back(0);
 
-		// all a's: element indices 1, 3, 5, ..., 2*numPairs - 1
 		for (std::size_t p = 0; p < numPairs; ++p) {
 			std::size_t a_idx  = 2 * p + 1;
 			mainElems.push_back(a_idx);
 		}
 	}
 
-	// PEND: b2..b_numPairs
 	std::vector<std::size_t> pendElems;
-	for (std::size_t p = 1; p < numPairs; ++p) { // start at b2
+	for (std::size_t p = 1; p < numPairs; ++p) {
 		std::size_t b_idx = 2 * p;
 		pendElems.push_back(b_idx);
 	}
 
-	// plus odd element as full element in pend
 	if (hasOdd) {
 		std::size_t odd_idx = 2 * numPairs;
 		pendElems.push_back(odd_idx);
 	}
 
 
-	std::cout << "Level elemSize=" << elemSize << "\nMain: ";
+	/* std::cout << "Level elemSize=" << elemSize << "\nMain: ";
 	printVector(flattenElems(seq, elemSize, mainElems));
 	std::cout << "Pend: ";
-	printVector(flattenElems(seq, elemSize, pendElems));
+	printVector(flattenElems(seq, elemSize, pendElems)); */
 
-	// Step 3: insert pend into main using Jacobsthal order
+	// Step 3: insert pend into main (using Jacobsthal order - last)
+	for (std::size_t i = 0; i < pendElems.size(); i++) {
+		std::size_t bIdx = pendElems[i];
+		int bRep = repOfElem(seq, elemSize, bIdx);
 
+		bool isOddElement = false;
+		std::size_t odd_idx = 2 * numPairs;
+		if (hasOdd && bIdx == odd_idx)
+			isOddElement = true;
 
+		std::size_t insertLimit;
+		
+		if (!isOddElement) {
+			std::size_t aIdx = bIdx + 1;
+			std::size_t aPos = 0;
+			while (aPos < mainElems.size() && mainElems[aPos] != aIdx)
+				++aPos;
+			
+			if (aPos == mainElems.size()) {
+				std::cout << "logic bug" << std::endl;
+			}
+
+			insertLimit = aPos;
+		} else {
+			insertLimit = mainElems.size() - 1;
+		}
+		
+
+		std::size_t insertPos = 0;
+		while (insertPos <= insertLimit && repOfElem(seq, elemSize, mainElems[insertPos]) < bRep) {
+			++insertPos;
+			++vector_comp_count;
+		}
+		mainElems.insert(mainElems.begin() + insertPos, bIdx);
+	}
+
+	std::vector<int> newSeq;
+	newSeq.reserve(n);
+
+	// reorder all full elements
+	for (std::size_t idx = 0; idx < mainElems.size(); ++idx) {
+		std::size_t e = mainElems[idx];
+		std::size_t start = e * elemSize;
+		std::size_t end   = start + elemSize;
+		newSeq.insert(newSeq.end(), seq.begin() + start, seq.begin() + end);
+	}
+
+	// Append numbers that didn't make a full element
+	std::size_t used = numElements * elemSize;
+	if (used < n) {
+		newSeq.insert(newSeq.end(), seq.begin() + used, seq.end());
+	}
+
+	// Replace seq with the new
+	seq.swap(newSeq);
 }
 
 void PmergeMe::SortVector() {
+	std::vector<int> tmp = _vector;
+	std::sort(tmp.begin(), tmp.end());
+	std::cout << "Using std::sort:" << std::endl;
+	printVector(tmp);
+	std::cout << "Using Ford Johnson:" << std::endl;
 	fordJohnson(_vector, 1);
 	printVector(_vector);
 }
@@ -163,5 +222,5 @@ void PmergeMe::compCountCheck() {
 
 	std::cout << "Maximum Comparisions allowed: F(" << n << ") = " << max_allowed << std::endl;
 	std::cout << "(Vector) Total Comparisions = " << vector_comp_count << std::endl;
-	//std::cout << "(Deqque) Total Comparisions = " << deque_comp_count << std::endl;
+	//std::cout << "(Deque) Total Comparisions = " << deque_comp_count << std::endl;
 }
