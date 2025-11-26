@@ -28,8 +28,8 @@ void PmergeMe::parseList(char *av[]) {
 		if (*s == '+') ++s;
 		if (!*s) throw std::runtime_error("Not a positive integer");
 
-/* 		if (*s == '0' && s[1] == '\0')
-			throw std::runtime_error("Not a positive integer"); */
+		if (*s == '0' && s[1] == '\0')
+			throw std::runtime_error("Not a positive integer");
 		
 		for (const char *p = s; *p; ++p) {
 			if (!isdigit(static_cast<unsigned char>(*p)))
