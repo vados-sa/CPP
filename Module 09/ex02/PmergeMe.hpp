@@ -2,9 +2,8 @@
 #include <vector>
 #include <deque>
 #include <iostream>
-
-// Your program must be able to handle at least 3000 different integers.
-// implement your algorithm for each container
+#include <ctime>
+#include <iomanip>
 
 class PmergeMe {
 	public:
@@ -35,7 +34,8 @@ class PmergeMe {
 		void insertPend(std::deque<int>& seq, std::size_t elemSize);
 		std::deque<std::size_t> buildJacobsthalOrder(const std::deque<std::size_t>& pendElems);
 
-		template <typename T> void printVector(const T& v) {
+		template <typename T> void printContainer(const T& v) {
+			std::cout << "After: ";
 			for (std::size_t i = 0; i < v.size(); i++) {
 				std::cout << v[i] << " ";
 			}
@@ -46,5 +46,4 @@ class PmergeMe {
 			std::size_t last = elemIndex * elemSize + (elemSize - 1);
 			return seq[last];
 		}
-
 };

@@ -3,6 +3,8 @@
 #include <sstream>
 #include <algorithm>
 #include <cmath>
+#include <ctime>
+#include <iomanip>
 
 PmergeMe::PmergeMe() : vector_comp_count(0), deque_comp_count(0) {}
 
@@ -38,20 +40,14 @@ void PmergeMe::parseList(char *av[]) {
 		if (n > INT32_MAX)
 			throw std::runtime_error("Integer overflow");
 		
-		_vector.push_back(static_cast<int>(n)); // this can probably be optimized
+		_vector.push_back(static_cast<int>(n));
 		_deque.push_back(static_cast<int>(n));
 	}
 
-/* 	std::cout << "Before: "; // double check if this is the best place for this.
-	int i = 1;
-	while (av[i + 1] && i < 5) {
+	std::cout << "Before: ";
+	for (int i = 1; av[i]; i++)
 		std::cout << av[i] << " ";
-		i++;
-	}
-	std::cout << av[i];
-	if (av[i + 1])
-		std::cout << " [...]";
-	std::cout << std::endl; */
+	std::cout << std::endl;
 }
 
 // VECTOR
@@ -202,13 +198,14 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 }
 
 void PmergeMe::SortVector() {
-	std::vector<int> tmp = _vector;
-	std::sort(tmp.begin(), tmp.end());
+	clock_t start = clock();
 	fordJohnson(_vector, 1);
-	if (_vector == tmp)
-		std::cout << "OK - Sorted like std::sort" << std::endl;
-	else std::cout << "KO" << std::endl;
-	printVector(_vector);
+	clock_t end = clock();
+	double time_taken = double(end - start) / CLOCKS_PER_SEC;
+	printContainer(_vector);
+	std::cout << "Time to process a range of " << _vector.size() 
+			  << " elements with std::vector : " << std::fixed 
+			  << std::setprecision(5) << time_taken << " s" << std::endl;
 }
 
 // DEQUE
@@ -357,13 +354,14 @@ void PmergeMe::fordJohnson(std::deque<int>& seq, std::size_t elemSize) {
 }
 
 void PmergeMe::SortDeque() {
-	std::deque<int> tmp = _deque;
-	std::sort(tmp.begin(), tmp.end());
+	clock_t start = clock();
 	fordJohnson(_deque, 1);
-	if (_deque == tmp)
-		std::cout << "OK - Sorted like std::sort" << std::endl;
-	else std::cout << "KO" << std::endl;
-	printVector(_deque);
+	clock_t end = clock();
+	double time_taken = double(end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "Time to process a range of " << _deque.size() 
+			  << " elements with std::deque : " << std::fixed 
+			  << std::setprecision(5) << time_taken << " s" << std::endl;
 }
 
 static size_t F(size_t n) {
