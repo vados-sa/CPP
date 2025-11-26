@@ -199,16 +199,19 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 		} else {
 			insertLimit = mainElems.size() - 1;
 		}
-		
 
-		std::size_t insertPos = 0;
-		while (insertPos <= insertLimit) {
-			++vector_comp_count;
-			if (repOfElem(seq, elemSize, mainElems[insertPos]) < bRep)
-				++insertPos;
-			else break;
+		std::size_t left = 0;
+		std::size_t right = isOddElement ? insertLimit + 1 : insertLimit;
+		while (left < right) {
+			std::size_t mid = left + (right - left) / 2;
+			vector_comp_count++;
+			if (repOfElem(seq, elemSize, mainElems[mid]) < bRep) {
+				left = mid + 1;
+			} else {
+				right = mid;
+			}
 		}
-		mainElems.insert(mainElems.begin() + insertPos, bIdx);
+		mainElems.insert(mainElems.begin() + left, bIdx);
 	}
 
 	std::vector<int> newSeq;
