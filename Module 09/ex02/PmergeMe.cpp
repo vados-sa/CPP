@@ -91,50 +91,30 @@ static std::vector<std::size_t> buildJacobsthalOrder(const std::vector<std::size
 	std::vector<std::size_t> order;
 	order.reserve(pendElems.size());
 
-	const std::size_t P = pendElems.size(); // number of b-elements in pend
+	if (pendElems.empty())
+		return order;
 
-    if (P == 0)
-        return order;
+	size_t prev_jacob = 1;
+	size_t curr_jacob = 3;
+	size_t last_index = 0;
 
-	std::size_t lastJac = 1;   // previous Jacobsthal "label" boundary (J2)
-    std::size_t J_prev  = 1;   // J2
-    std::size_t J_curr  = 3;   // J3
+	while (last_index < pendElems.size()) {
+		size_t bound_index = curr_jacob - 2;
 
-	const std::size_t Lmax = P + 1;
+		if (bound_index >= pendElems.size())
+			bound_index = pendElems.size() - 1;
 
-	// 1) Jacobsthal-driven segments
-    while (J_curr <= Lmax) {
-        // Insert labels in (lastJac, J_curr], in reverse
-        std::size_t label = J_curr;
-        while (label > lastJac) {
-            if (label >= 2) {
-                std::size_t pos = label - 2; // 0-based position in pendElems
-                if (pos < P) {
-                    order.push_back(pendElems[pos]); // push *element index*
-                }
-            }
-            --label;
-        }
+		for (size_t i = bound_index; ; --i) {
+			order.push_back(pendElems[i]);
+			if (i == last_index)
+				break;
+		}
+		last_index = bound_index + 1;
 
-        lastJac = J_curr;
-
-        // Next Jacobsthal: J_next = J_curr + 2 * J_prev
-        std::size_t J_next = J_curr + 2 * J_prev;
-        J_prev = J_curr;
-        J_curr = J_next;
-    }
-
-    // 2) Remaining labels (if any), inserted in reverse order
-    std::size_t label = Lmax;
-    while (label > lastJac) {
-        if (label >= 2) {
-            std::size_t pos = label - 2; // 0-based index in pendElems
-            if (pos < P) {
-                order.push_back(pendElems[pos]);
-            }
-        }
-        --label;
-    }
+		size_t next_jacob = curr_jacob + 2 * prev_jacob;
+		prev_jacob = curr_jacob;
+		curr_jacob = next_jacob;
+	}
 	return order;
 }
 
@@ -146,8 +126,8 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 		return ;
 
 	for (std::size_t i = elemSize - 1; i + elemSize < n; i += elemSize * 2) {
+		vector_comp_count++;
 		if (seq[i] > seq[i + elemSize]) {
-			vector_comp_count++;
 			std::size_t left_first = i - (elemSize - 1);
 			std::size_t right_first = left_first + elemSize;
 			std::swap_ranges(seq.begin() + left_first,
@@ -222,9 +202,11 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 		
 
 		std::size_t insertPos = 0;
-		while (insertPos <= insertLimit && repOfElem(seq, elemSize, mainElems[insertPos]) < bRep) {
-			++insertPos;
+		while (insertPos <= insertLimit) {
 			++vector_comp_count;
+			if (repOfElem(seq, elemSize, mainElems[insertPos]) < bRep)
+				++insertPos;
+			else break;
 		}
 		mainElems.insert(mainElems.begin() + insertPos, bIdx);
 	}
