@@ -63,23 +63,6 @@ static void printVector(const std::vector<int>& v) {
 	std::cout << std::endl;
 }
 
-/* static std::vector<int> flattenElems(const std::vector<int>& seq,
-                              std::size_t elemSize,
-                              const std::vector<std::size_t>& elems)
-{
-    std::vector<int> out;
-	out.reserve(elems.size() * elemSize);
-
-    for (std::vector<std::size_t>::const_iterator it = elems.begin(); it != elems.end(); ++it)
-	{
-	    std::size_t e = *it;
-	    std::size_t start = e * elemSize;
-	    std::size_t end   = start + elemSize;
-	    out.insert(out.end(), seq.begin() + start, seq.begin() + end);
-	}
-    return out;
-} */
-
 static int repOfElem(const std::vector<int>& seq, std::size_t elemSize, std::size_t elemIndex)
 {
     std::size_t last = elemIndex * elemSize + (elemSize - 1);
@@ -118,12 +101,8 @@ static std::vector<std::size_t> buildJacobsthalOrder(const std::vector<std::size
 	return order;
 }
 
-void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
-	// Step 1
+void PmergeMe::makePairs(std::vector<int>& seq, std::size_t elemSize) {
 	const std::size_t n = seq.size();
-
-	if (2 * elemSize > n)
-		return ;
 
 	for (std::size_t i = elemSize - 1; i + elemSize < n; i += elemSize * 2) {
 		vector_comp_count++;
@@ -135,11 +114,10 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 							seq.begin() + right_first);
 		}
 	}
+}
 
-	fordJohnson(seq, elemSize * 2);
-
-	// Step 2: build chains (main + pend)
-
+void PmergeMe::insertPend(std::vector<int>& seq, std::size_t elemSize) {
+	const std::size_t n = seq.size();
 	const std::size_t numElements = n / elemSize;
 	const std::size_t numPairs    = numElements / 2;
 	const bool   hasOdd      = (numElements % 2 != 0);
@@ -165,16 +143,10 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 		pendElems.push_back(odd_idx);
 	}
 
-
-	/* std::cout << "Level elemSize=" << elemSize << "\nMain: ";
-	printVector(flattenElems(seq, elemSize, mainElems));
-	std::cout << "Pend: ";
-	printVector(flattenElems(seq, elemSize, pendElems)); */
-
 	// Step 3: insert pend into main using Jacobsthal order
 	std::vector<std::size_t> order = buildJacobsthalOrder(pendElems);
 
-	for (std::size_t i = 0; i < order.size(); i++) { // jacobsthal sequence goes in here.
+	for (std::size_t i = 0; i < order.size(); i++) {
 		std::size_t bIdx = order[i];
 		int bRep = repOfElem(seq, elemSize, bIdx);
 
@@ -232,16 +204,25 @@ void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
 	}
 
 	// Replace seq with the new
-	seq.swap(newSeq);
+	seq.swap(newSeq); 
+}
+
+void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
+	if (2 * elemSize > seq.size())
+		return ;
+
+	makePairs(seq, elemSize);
+	fordJohnson(seq, elemSize * 2);
+	insertPend(seq, elemSize);
 }
 
 void PmergeMe::SortVector() {
 	std::vector<int> tmp = _vector;
 	std::sort(tmp.begin(), tmp.end());
-	std::cout << "Using std::sort:" << std::endl;
-	printVector(tmp);
-	std::cout << "Using Ford Johnson:" << std::endl;
 	fordJohnson(_vector, 1);
+	if (_vector == tmp)
+		std::cout << "OK - Sorted like std::sort" << std::endl;
+	else std::cout << "KO" << std::endl;
 	printVector(_vector);
 }
 
