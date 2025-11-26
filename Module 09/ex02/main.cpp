@@ -23,7 +23,7 @@ int main(int ac, char *av[]) {
 		PmergeMe obj;
 		obj.parseList(av);
 		obj.SortVector();
-		//obj.SortDeque();
+		obj.SortDeque();
 		obj.compCountCheck();
 	}
 	catch(const std::exception& e)
