@@ -9,7 +9,6 @@ int main (int ac, char *av[]) {
 	
 	try {
 		BitcoinExchange btc(av[1]);
-		// maybe use a try and catch
 		btc.loadDB();
 		//btc.printDB();
 		btc.processInputFile();
