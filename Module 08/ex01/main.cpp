@@ -1,7 +1,7 @@
 #include "Span.hpp"
 #include <iostream>
 
-void school_test() {
+void schoolTest() {
 	std::cout << "---- 42 test ----" << std::endl;
 
 	Span sp = Span(5);
@@ -16,7 +16,7 @@ void school_test() {
 	std::cout << "Longest span: " << sp.longestSpan() << std::endl;
 }
 
-void test_big_sequential() {
+void testBigSequential() {
 	std::cout << "---- Test more than 10000 numbers ----" << std::endl;
 
 	Span sp = Span(10002);
@@ -31,7 +31,7 @@ void test_big_sequential() {
 	sp.addNumber(10003);
 }
 
-void test_big_addRange() {
+void testAddRange() {
 	std::cout << "---- Test adding range ----" << std::endl;
 
 	std::vector<int> range;
@@ -50,7 +50,7 @@ int main()
 {
 	try
 	{
-		school_test();
+		schoolTest();
 	}
 	catch(const std::exception& e)
 	{
@@ -59,7 +59,7 @@ int main()
 
 	try
 	{
-		test_big_sequential();
+		testBigSequential();
 	}
 	catch(const std::exception& e)
 	{
@@ -68,7 +68,7 @@ int main()
 
 	try
 	{
-		test_big_addRange();
+		testAddRange();
 	}
 	catch(const std::exception& e)
 	{
