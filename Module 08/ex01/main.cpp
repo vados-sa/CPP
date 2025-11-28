@@ -1,5 +1,9 @@
 #include "Span.hpp"
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
 
 void schoolTest() {
 	std::cout << "---- 42 test ----" << std::endl;
@@ -34,12 +38,12 @@ void testBigSequential() {
 void testAddRange() {
 	std::cout << "---- Test adding range ----" << std::endl;
 
-	std::vector<int> range;
+	std::vector<int> range(10000);
 
-	for (int i = 0; i < 1000; i++)
-		range.push_back(i);
+	std::srand(time(NULL));
+	std::generate(range.begin(), range.end(), std::rand);
 	
-	Span sp = Span(1000);
+	Span sp = Span(10000);
 	sp.addRange(range.begin(), range.end());
 
 	std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
