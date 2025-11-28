@@ -64,7 +64,11 @@ Perform operations through iterators, not directly on containers.
 
 
 # std::stack
-Stacks are a type of container adaptor, specifically designed to operate in a LIFO context (last-in first-out), where elements are inserted and extracted only from one end of the container.
+Stacks are container adaptors, meaning they do not manage the data storage themselves; instead, they wrap an existing cointainer (like std::deque, std::vector, or std::list) and provide a restricted iterface to access it.
+
+**1 - It adapts the interface:** It forces a LIFO (Last-In, First-Out) behavior by only allowing you to push(), pop(), and view the top().
+
+**2 - It hides the underlying container**: You cannot access the elements in the middle or iterate over them directly.
 
 It’s a thin wrapper over another container (by default `std::deque<T>`).
 
