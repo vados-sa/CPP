@@ -125,7 +125,7 @@ static double validadeExchangeRate(std::string line, std::size_t pos) {
 }
 
 void BitcoinExchange::processInputFile() {
-	std::ifstream input_file(file);
+	std::ifstream input_file(file.c_str());
 	std::string line;
 	if (input_file.is_open()) {
 		std::string header; 

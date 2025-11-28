@@ -5,6 +5,7 @@
 #include <cmath>
 #include <ctime>
 #include <iomanip>
+#include <climits>
 
 PmergeMe::PmergeMe() : vector_comp_count(0), deque_comp_count(0) {}
 
@@ -37,7 +38,7 @@ void PmergeMe::parseList(char *av[]) {
 		}
 
 		unsigned long n = std::strtoul(av[i], 0, 10);
-		if (n > INT32_MAX)
+		if (n > INT_MAX)
 			throw std::runtime_error("Integer overflow");
 		
 		_vector.push_back(static_cast<int>(n));

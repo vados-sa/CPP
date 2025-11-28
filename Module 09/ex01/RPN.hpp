@@ -1,6 +1,7 @@
 #pragma once
 #include <stack>
 #include <list>
+#include <string>
 
 class RPN {
 	std::stack<double, std::list<double> > st;
