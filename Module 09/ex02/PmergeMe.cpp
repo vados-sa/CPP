@@ -51,7 +51,29 @@ void PmergeMe::parseList(char *av[]) {
 	std::cout << std::endl;
 }
 
-// VECTOR
+// --------------------------------------------------------------------- VECTOR
+
+void PmergeMe::SortVector() {
+	clock_t start = clock();
+	fordJohnson(_vector, 1);
+	clock_t end = clock();
+	double time_taken = double(end - start) / CLOCKS_PER_SEC;
+	printContainer(_vector);
+	std::cout << "Time to process a range of " << _vector.size() 
+			  << " elements with std::vector : " << std::fixed 
+			  << std::setprecision(5) << time_taken << " s" << std::endl;
+}
+
+void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
+	if (2 * elemSize > seq.size())
+		return ;
+
+	makePairs(seq, elemSize);
+	fordJohnson(seq, elemSize * 2);
+	insertPendInMain(seq, elemSize);
+}
+
+
 void PmergeMe::makePairs(std::vector<int>& seq, std::size_t elemSize) {
 	const std::size_t n = seq.size();
 
@@ -67,38 +89,7 @@ void PmergeMe::makePairs(std::vector<int>& seq, std::size_t elemSize) {
 	}
 }
 
-std::vector<std::size_t> PmergeMe::buildJacobsthalOrder(const std::vector<std::size_t>& pendElems) {
-	std::vector<std::size_t> order;
-	order.reserve(pendElems.size());
-
-	if (pendElems.empty())
-		return order;
-
-	size_t prev_jacob = 1;
-	size_t curr_jacob = 3;
-	size_t last_index = 0;
-
-	while (last_index < pendElems.size()) {
-		size_t bound_index = curr_jacob - 2;
-
-		if (bound_index >= pendElems.size())
-			bound_index = pendElems.size() - 1;
-
-		for (size_t i = bound_index; ; --i) {
-			order.push_back(pendElems[i]);
-			if (i == last_index)
-				break;
-		}
-		last_index = bound_index + 1;
-
-		size_t next_jacob = curr_jacob + 2 * prev_jacob;
-		prev_jacob = curr_jacob;
-		curr_jacob = next_jacob;
-	}
-	return order;
-}
-
-void PmergeMe::insertPend(std::vector<int>& seq, std::size_t elemSize) {
+void PmergeMe::insertPendInMain(std::vector<int>& seq, std::size_t elemSize) {
 	const std::size_t n = seq.size();
 	const std::size_t numElements = n / elemSize;
 	const std::size_t numPairs    = numElements / 2;
@@ -125,7 +116,6 @@ void PmergeMe::insertPend(std::vector<int>& seq, std::size_t elemSize) {
 		pendElems.push_back(odd_idx);
 	}
 
-	// Step 3: insert pend into main using Jacobsthal order
 	std::vector<std::size_t> order = buildJacobsthalOrder(pendElems);
 
 	for (std::size_t i = 0; i < order.size(); i++) {
@@ -189,44 +179,9 @@ void PmergeMe::insertPend(std::vector<int>& seq, std::size_t elemSize) {
 	seq.swap(newSeq); 
 }
 
-void PmergeMe::fordJohnson(std::vector<int>& seq, std::size_t elemSize) {
-	if (2 * elemSize > seq.size())
-		return ;
-
-	makePairs(seq, elemSize);
-	fordJohnson(seq, elemSize * 2);
-	insertPend(seq, elemSize);
-}
-
-void PmergeMe::SortVector() {
-	clock_t start = clock();
-	fordJohnson(_vector, 1);
-	clock_t end = clock();
-	double time_taken = double(end - start) / CLOCKS_PER_SEC;
-	printContainer(_vector);
-	std::cout << "Time to process a range of " << _vector.size() 
-			  << " elements with std::vector : " << std::fixed 
-			  << std::setprecision(5) << time_taken << " s" << std::endl;
-}
-
-// DEQUE
-void PmergeMe::makePairs(std::deque<int>& seq, std::size_t elemSize) {
-	const std::size_t n = seq.size();
-
-	for (std::size_t i = elemSize - 1; i + elemSize < n; i += elemSize * 2) {
-		deque_comp_count++;
-		if (seq[i] > seq[i + elemSize]) {
-			std::size_t left_first = i - (elemSize - 1);
-			std::size_t right_first = left_first + elemSize;
-			std::swap_ranges(seq.begin() + left_first,
-							seq.begin() + left_first + elemSize,
-							seq.begin() + right_first);
-		}
-	}
-}
-
-std::deque<std::size_t> PmergeMe::buildJacobsthalOrder(const std::deque<std::size_t>& pendElems) {
-	std::deque<std::size_t> order;
+std::vector<std::size_t> PmergeMe::buildJacobsthalOrder(const std::vector<std::size_t>& pendElems) {
+	std::vector<std::size_t> order;
+	order.reserve(pendElems.size());
 
 	if (pendElems.empty())
 		return order;
@@ -255,7 +210,43 @@ std::deque<std::size_t> PmergeMe::buildJacobsthalOrder(const std::deque<std::siz
 	return order;
 }
 
-void PmergeMe::insertPend(std::deque<int>& seq, std::size_t elemSize) {
+// ---------------------------------------------------------------------- DEQUE
+
+void PmergeMe::SortDeque() {
+	clock_t start = clock();
+	fordJohnson(_deque, 1);
+	clock_t end = clock();
+	double time_taken = double(end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "Time to process a range of " << _deque.size() 
+			  << " elements with std::deque : " << std::fixed 
+			  << std::setprecision(5) << time_taken << " s" << std::endl;
+}
+
+void PmergeMe::fordJohnson(std::deque<int>& seq, std::size_t elemSize) {
+	if (2 * elemSize > seq.size())
+		return ;
+
+	makePairs(seq, elemSize);
+	fordJohnson(seq, elemSize * 2);
+	insertPendInMain(seq, elemSize);
+}
+
+void PmergeMe::makePairs(std::deque<int>& seq, std::size_t elemSize) {
+	const std::size_t n = seq.size();
+
+	for (std::size_t i = elemSize - 1; i + elemSize < n; i += elemSize * 2) {
+		deque_comp_count++;
+		if (seq[i] > seq[i + elemSize]) {
+			std::size_t left_first = i - (elemSize - 1);
+			std::size_t right_first = left_first + elemSize;
+			std::swap_ranges(seq.begin() + left_first,
+							seq.begin() + left_first + elemSize,
+							seq.begin() + right_first);
+		}
+	}
+}
+void PmergeMe::insertPendInMain(std::deque<int>& seq, std::size_t elemSize) {
 	const std::size_t n = seq.size();
 	const std::size_t numElements = n / elemSize;
 	const std::size_t numPairs    = numElements / 2;
@@ -345,25 +336,36 @@ void PmergeMe::insertPend(std::deque<int>& seq, std::size_t elemSize) {
 	seq.swap(newSeq); 
 }
 
-void PmergeMe::fordJohnson(std::deque<int>& seq, std::size_t elemSize) {
-	if (2 * elemSize > seq.size())
-		return ;
+std::deque<std::size_t> PmergeMe::buildJacobsthalOrder(const std::deque<std::size_t>& pendElems) {
+	std::deque<std::size_t> order;
 
-	makePairs(seq, elemSize);
-	fordJohnson(seq, elemSize * 2);
-	insertPend(seq, elemSize);
+	if (pendElems.empty())
+		return order;
+
+	size_t prev_jacob = 1;
+	size_t curr_jacob = 3;
+	size_t last_index = 0;
+
+	while (last_index < pendElems.size()) {
+		size_t bound_index = curr_jacob - 2;
+
+		if (bound_index >= pendElems.size())
+			bound_index = pendElems.size() - 1;
+
+		for (size_t i = bound_index; ; --i) {
+			order.push_back(pendElems[i]);
+			if (i == last_index)
+				break;
+		}
+		last_index = bound_index + 1;
+
+		size_t next_jacob = curr_jacob + 2 * prev_jacob;
+		prev_jacob = curr_jacob;
+		curr_jacob = next_jacob;
+	}
+	return order;
 }
-
-void PmergeMe::SortDeque() {
-	clock_t start = clock();
-	fordJohnson(_deque, 1);
-	clock_t end = clock();
-	double time_taken = double(end - start) / CLOCKS_PER_SEC;
-
-	std::cout << "Time to process a range of " << _deque.size() 
-			  << " elements with std::deque : " << std::fixed 
-			  << std::setprecision(5) << time_taken << " s" << std::endl;
-}
+// ----------------------------------------------------------------------------
 
 static size_t F(size_t n) {
 	size_t sum = 0;
