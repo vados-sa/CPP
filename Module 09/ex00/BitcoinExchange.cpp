@@ -98,7 +98,7 @@ static std::string validadeDate(std::string line, std::size_t pos) {
 	return date;
 }
 
-static double validadeExchangeRate(std::string line, std::size_t pos) {
+static double validateValue(std::string line, std::size_t pos) {
 	std::string valueStr = line.substr(pos + 3);
 
 	char* end = 0;
@@ -146,7 +146,7 @@ void BitcoinExchange::processInputFile() {
 			if (date.empty())
 				continue ;
 
-			double value = validadeExchangeRate(line, pos);
+			double value = validateValue(line, pos);
 			if (value == -1)
 				continue ;
 
