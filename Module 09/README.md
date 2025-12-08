@@ -10,9 +10,21 @@ I chose `std::stack` because [RPN evaluation](https://en.wikipedia.org/wiki/Reve
 ## ex02: PmergeMe - The final boss
 The Ford-Johnson algorithm (Merge-Insertion Sort) relies heavily on grouping elements into pairs and recursively sorting them. This requires efficient **random access** to elements (to access specific indices during binary search insertion) and efficient **insertion** capabilities.
 
-I chose `std::vector` and `std::deque` because:
-1.  **`std::vector`**: Provides fast random access ($O(1)$), which is excellent for the binary search part of the algorithm. However, inserting elements in the middle can be costly ($O(n)$) due to memory reallocation.
-2.  **`std::deque`**: Also provides random access (though slightly slower than vector) but handles insertions at the beginning/end more efficiently. It serves as a good comparative container to see how memory layout affects the algorithm's performance.
+I chose `std::vector` and `std::deque` because both provide fast random access, which is useful in the Ford-Johnson algorithm.
+
+Comparision on how memory layout impacts the Ford-Johnson algorithm:
+
+1.  **`std::vector`**:
+    *   **Memory**: Contiguous block.
+    *   **Access**: $O(1)$ with **excellent cache locality**. The CPU can pre-fetch data efficiently, making the binary search comparisons extremely fast.
+    *   **Insertion**: $O(n)$ for middle insertions. It must shift all subsequent elements. While theoretically "slow", modern CPUs optimize these contiguous memory moves (`memmove`) very well.
+    *   **Performance**: For the required range (~3000 integers), the speed of access/comparisons outweighs the cost of shifting elements, making it generally faster.
+
+2.  **`std::deque`**:
+    *   **Memory**: A map of pointers to fixed-size chunks (non-contiguous).
+    *   **Access**: $O(1)$, but slower than vector due to **double dereferencing** (Map -> Chunk -> Element) and poor cache locality.
+    *   **Insertion**: $O(n)$ for middle insertions. While it avoids reallocating the whole container, shifting elements across non-contiguous chunks is less cache-friendly than vector's shift.
+    *   **Performance**: It serves as a benchmark. The slight overhead in accessing elements during the binary search step accumulates, typically making it slower than `std::vector` for this specific sorting algorithm.
 
 `std::list` was avoided because it lacks random access iterators (you can't jump to the middle instantly), making the binary search step of Ford-Johnson significantly slower. `std::set` was avoided because it sorts elements automatically, which defeats the purpose of implementing a sorting algorithm manually.
 
