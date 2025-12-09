@@ -18,6 +18,7 @@ class PmergeMe {
 		void SortDeque();
 		
 		void compCountCheck();
+		void isSorted();
 	
 	private:
 		std::vector<int> _vector;

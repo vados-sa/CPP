@@ -385,3 +385,21 @@ void PmergeMe::compCountCheck() {
 	std::cout << "(Vector) Total Comparisions = " << vector_comp_count << std::endl;
 	std::cout << "(Deque) Total Comparisions = " << deque_comp_count << std::endl;
 }
+
+void PmergeMe::isSorted() {
+	std::vector<int> testV = _vector;
+	std::deque<int> testD = _deque;
+
+	std::sort(testV.begin(), testV.end());
+	std::sort(testD.begin(), testD.end());
+
+	if (_vector == testV)
+		std::cout << "Vector is sorted" << std::endl;
+	else
+		std::cout << "Vector is not sorted" << std::endl;
+	
+	if (_deque == testD)
+		std::cout << "Deque is sorted" << std::endl;
+	else
+		std::cout << "Deque is not sorted" << std::endl;
+}

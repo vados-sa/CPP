@@ -14,6 +14,7 @@ int main(int ac, char *av[]) {
 		obj.SortVector();
 		obj.SortDeque();
 		//obj.compCountCheck();
+		//obj.isSorted();
 	}
 	catch(const std::exception& e)
 	{
